@@ -1,7 +1,7 @@
 import { StatusBar } from 'expo-status-bar';
 import { useState } from 'react';
 import { StyleSheet, Text, View } from 'react-native';
-import Header from './src/components/Header';
+import Header from './src/components/Header/Header';
 import { colors } from './src/constants/colors';
 import useFonts from './src/hooks/useFonts';
 import AppLoading from 'expo-app-loading';

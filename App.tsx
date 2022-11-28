@@ -1,10 +1,12 @@
 import { StatusBar } from 'expo-status-bar';
 import { useState } from 'react';
 import { StyleSheet, Text, View } from 'react-native';
-import Header from './src/components/Header/Header';
-import { colors } from './src/constants/colors';
 import useFonts from './src/hooks/useFonts';
 import AppLoading from 'expo-app-loading';
+import { NavigationContainer } from '@react-navigation/native';
+import { colors } from './src/constants/colors';
+import AuthRoutes from './src/routes/AuthRoutes';
+import * as NavigationBar from 'expo-navigation-bar';
 
 export default function App() {
   const [isLoading, setIsLoading] = useState<boolean>(true);
@@ -13,10 +15,16 @@ export default function App() {
     await useFonts()
   }
 
+  const loadApp = async() => {
+    await loadFonts();
+    await NavigationBar.setBackgroundColorAsync('white');
+    await NavigationBar.setButtonStyleAsync('dark');
+  }
+
   if(isLoading) {
     return (
       <AppLoading
-        startAsync={loadFonts}
+        startAsync={loadApp}
         onFinish={() => setIsLoading(false)}
         onError={() => {}}
       />
@@ -24,15 +32,14 @@ export default function App() {
   }
 
   return (
-    <View style={styles.container}>
+    <NavigationContainer>
       <StatusBar 
         style="light" 
         backgroundColor={colors.primary}
         translucent={false}
       />
-      <Header />
-      <Text>Open up App.js to start  working on your app!</Text>
-    </View>
+      <AuthRoutes />
+    </NavigationContainer>
   );
 }
 

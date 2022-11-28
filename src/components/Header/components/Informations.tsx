@@ -5,7 +5,7 @@ import {
 } from 'react-native';
 import React from 'react';
 import { colors } from '../../../constants/colors';
-import TextStyled from '../../TextStyled';
+import TextStyled from '../../TextStyled/TextStyled';
 import { Avatar, Colors } from 'react-native-ui-lib';
 import { Ionicons } from '@expo/vector-icons';
 

@@ -1,7 +1,7 @@
 import { View, StyleSheet } from 'react-native';
 import React from 'react';
 import { colors } from '../../constants/colors';
-import TextStyled from '../TextStyled';
+import TextStyled from '../TextStyled/TextStyled';
 import Informations from './components/Informations';
 import FilterChip from './components/FilterChip';
 

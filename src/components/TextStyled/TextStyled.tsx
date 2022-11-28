@@ -1,6 +1,5 @@
-import { View, Text, StyleSheet, TextStyle } from 'react-native'
+import { Text, TextStyle } from 'react-native'
 import React from 'react'
-import { colors } from '../constants/colors'
 
 type Props = {
     children?: React.ReactNode,
@@ -16,6 +15,7 @@ const TextStyled = (props: Props) => {
         style={[
             {
                 color: color,
+                fontSize: 15,
                 fontFamily: `Montserrat${props.variant ? `${props.variant.charAt(0).toUpperCase()}${props.variant.slice(1)}` : 'Regular'}`
             },
             props.style

@@ -36,9 +36,18 @@ const Informations = (props: Props) => {
             </TextStyled>
             </View>
         </View>
-        <TouchableOpacity>
-            <Ionicons name="settings-outline" size={24} color={colors.secondary} />
-        </TouchableOpacity>
+        <View style={styles.icons}>
+            <TouchableOpacity
+                style={styles.icon}
+            >
+                <Ionicons name="ios-person-outline" size={24} color={colors.secondary} />
+            </TouchableOpacity> 
+            <TouchableOpacity
+                style={styles.icon}
+            >
+                <Ionicons name="settings-outline" size={24} color={colors.secondary} />
+            </TouchableOpacity> 
+        </View>
     </View>
   )
 }
@@ -62,4 +71,10 @@ const styles = StyleSheet.create({
         fontSize: 15,
         marginLeft: 15
     },
+    icons: {
+        flexDirection: 'row'
+    },
+    icon: {
+        marginLeft: 40
+    }
 })

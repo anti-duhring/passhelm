@@ -11,37 +11,43 @@ const DATA = [
       title: "Email Google",
       category: 'blue',
       category_name: 'Trabalho',
-      login: 'mateusvnlima@gmail.com'
+      login: 'mateusvnlima@gmail.com',
+      password: '123456789'
     },
     {
       title: "Facebook",
       category: 'green',
       category_name: 'Pessoal',
-      login: 'mateusvnlima@gmail.com'
+      login: 'mateusvnlima@gmail.com',
+      password: '123456789'
     },
     {
       title: "Instagram",
       category: 'orange',
       category_name: 'Rede Social',
-      login: 'mtvozzy'
+      login: 'mtvozzy',
+      password: '123456789'
     },
     {
       title: "Github",
       category: 'blue',
       category_name: 'Trabalho',
-      login: 'anti-duhring'
+      login: 'anti-duhring',
+      password: '123456789'
     },
     {
       title: "Twitter",
       category: 'orange',
       category_name: 'Rede Social',
-      login: 'antiduhring_'
+      login: 'antiduhring_',
+      password: '123456789'
     },
     {
       title: "TikTok",
       category: 'green',
       category_name: 'Pessoal',
-      login: 'mtvozzy'
+      login: 'mtvozzy',
+      password: '123456789'
     },
 ];
 

@@ -15,9 +15,9 @@ const Header = (props: Props) => {
         <TextStyled 
           style={styles.title}
           color='light'
-          variant='bold'
+          variant='medium'
         >
-          Senhas
+          Contas
         </TextStyled>
         <FilterChip />
       </View>

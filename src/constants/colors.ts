@@ -3,18 +3,20 @@ export const colors = {
     // primary: '#00AEAE',
     secondary: '#FFFFFF',
     primary_light: '#37bd37',
+    gray: '#b0b0b0',
+    black: '#000000',
     password_category: {
         blue: {
             light: '#edf6fd',
-            dark: '#1a5de7'
+            dark: '#7ea0e5'
         },
         green: {
             light: '#e6fbea',
-            dark: '#14b158'
+            dark: '#7cdda6'
         },
         orange: {
             light: '#fff0e1',
-            dark: '#e79040'
+            dark: '#e7b17f'
         }
     }
 }

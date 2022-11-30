@@ -1,7 +1,7 @@
 import { StyleSheet, Text, View } from 'react-native'
 import React from 'react'
 import { FlashList } from '@shopify/flash-list'
-import TextStyled from '../TextStyled/TextStyled';
+import { SwipeProvider } from 'react-native-swipe-item';
 import PasswordItem from './components/PasswordItem';
 
 type Props = {}
@@ -53,12 +53,12 @@ const DATA = [
 
 const PasswordList = (props: Props) => {
   return (
-    <FlashList
-      data={DATA}
-      renderItem={PasswordItem}
-      estimatedItemSize={200}
-      contentContainerStyle={styles.container}
-    /> 
+      <FlashList
+        data={DATA}
+        renderItem={({ item }) => <PasswordItem item={item} />}
+        estimatedItemSize={200}
+        contentContainerStyle={styles.container}
+      /> 
   )
 }
 

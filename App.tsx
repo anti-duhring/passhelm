@@ -35,7 +35,7 @@ export default function App() {
     <NavigationContainer>
       <StatusBar 
         style="light" 
-        backgroundColor={colors.primary}
+        backgroundColor={'black'}
         translucent={false}
       />
       <AuthRoutes />
@@ -47,7 +47,6 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'space-between',
+
   },
 });

@@ -1,7 +1,7 @@
 import { StyleSheet, TouchableOpacity, View } from 'react-native'
 import React from 'react'
-import { colors } from '../../../constants/colors';
-import TextStyled from '../../TextStyled/TextStyled';
+import { colors } from '../../constants/colors';
+import TextStyled from '../TextStyled';
 import { Ionicons } from '@expo/vector-icons';
 import { Feather } from '@expo/vector-icons';
 
@@ -15,11 +15,11 @@ const SwipeButtons = (props: any) => {
                 onPress={() => console.log('left button clicked')}
                 style={[styles.button]}
             >
-                <Feather name="edit" size={24} color={colors.blue} />
+                <Feather name="edit" size={24} color={colors.primary} />
                 <TextStyled 
                     variant='medium' 
                     style={{
-                        color: colors.blue
+                        color: colors.primary
                     }}
                 >
                     Editar

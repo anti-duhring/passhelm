@@ -4,8 +4,8 @@ import {
     TouchableOpacity
 } from 'react-native';
 import React from 'react';
-import { colors } from '../../../constants/colors';
-import TextStyled from '../../TextStyled/TextStyled';
+import { colors } from '../../constants/colors';
+import TextStyled from '../TextStyled';
 import { Avatar, Colors } from 'react-native-ui-lib';
 import { Ionicons } from '@expo/vector-icons';
 
@@ -16,21 +16,20 @@ const Informations = (props: Props) => {
     <View style={styles.container}>
         <View style={styles.informations}>
             <Avatar 
-                source={require('../../../../assets/avatar.jpg')} 
+                source={require('../../../assets/avatar.jpg')} 
                 label={'MV'}
                 size={50} 
                 labelColor={colors.primary}
                 badgeProps={{
-                    backgroundColor: colors.secondary,
-                    borderColor: colors.primary,
+                    backgroundColor: colors.green,
+                    borderColor: 'black',
                     borderWidth: 2
                 }}
             />
             <View>
             <TextStyled 
                 style={styles.greetings}
-                color='light'
-                variant='medium'
+                variant='light'
             >
                 Olá, Mateus
             </TextStyled>
@@ -61,15 +60,17 @@ const styles = StyleSheet.create({
     },
     container: {
         flexDirection: 'row',
-        alignItems: 'center',
-        justifyContent: 'space-between'
+        alignItems: 'flex-start',
+        justifyContent: 'space-between',
+        flex: 1,
     },
     title: {
         fontSize: 25
     },
     greetings: {
         fontSize: 15,
-        marginLeft: 15
+        marginLeft: 15,
+        color: 'white'
     },
     icons: {
         flexDirection: 'row'

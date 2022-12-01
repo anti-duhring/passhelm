@@ -1,6 +1,6 @@
 import { StyleSheet, View, TouchableOpacity } from 'react-native'
 import React from 'react'
-import { colors } from '../../../constants/colors'
+import { colors } from '../../constants/colors'
 import { Ionicons } from '@expo/vector-icons';
 import { Entypo } from '@expo/vector-icons';
 
@@ -20,14 +20,14 @@ const ActionButtons = (props: Props) => {
             <Ionicons 
                 name={props.showPassword ? 'eye-off-outline' : "eye-outline"} 
                 size={24} 
-                color={colors.password_category[props.item.category].dark} 
+                color={'black'} 
             />
         </TouchableOpacity>
-        <TouchableOpacity style={styles.actionButton}>
+        <TouchableOpacity style={[styles.actionButton, { marginLeft: 10 }]}>
             <Ionicons 
                 name="copy-outline" 
                 size={24} 
-                color={colors.password_category[props.item.category].dark} 
+                color={'black'}
             />
         </TouchableOpacity>
     </View>
@@ -40,10 +40,12 @@ const styles = StyleSheet.create({
     action: {
         flexDirection: 'row',
         justifyContent: 'space-between',
-        paddingRight: 10,
-        flex: 1
+        alignItems: 'stretch',
+        flex: 1,
     },
     actionButton: {
-        marginLeft: 20
+        flex: 1,
+        justifyContent: 'center',
+        alignItems: 'center'
     },
 })

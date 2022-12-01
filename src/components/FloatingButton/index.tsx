@@ -1,7 +1,7 @@
 import { StyleSheet, Text, View, TouchableOpacity } from 'react-native'
 import React from 'react'
 import { colors } from '../../constants/colors'
-import TextStyled from '../TextStyled/TextStyled'
+import TextStyled from '../TextStyled'
 
 type Props = {
     icon?: React.ReactNode,

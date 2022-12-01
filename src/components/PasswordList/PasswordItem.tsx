@@ -1,10 +1,9 @@
 import { StyleSheet, View } from 'react-native'
 import React from 'react'
-import { colors } from '../../../constants/colors'
+import { colors } from '../../constants/colors'
 import Chips from './Chips';
 import ActionButtons from './ActionButtons';
-import OnlyLoginBody from './OnlyLoginBody';
-import LoginAndPasswordBody from './LoginAndPasswordBody';
+import LoginData from './LoginData';
 import { SwipeItem, SwipeButtonsContainer } from 'react-native-swipe-item';
 import SwipeButtons from './SwipeButtons';
 
@@ -29,7 +28,6 @@ class PasswordItem extends React.Component<Props> {
             <SwipeButtons item={this.props.item} />
         </SwipeButtonsContainer>
     )
-    //TODO: Create two different components, one to show informations when the password is not set to be showed and another to show the password, and put booth inside the container View, which will have all the styling except by the padding
     render() {
         return (
             <SwipeItem 
@@ -40,29 +38,30 @@ class PasswordItem extends React.Component<Props> {
                 //     right: true
                 // }}
                 swipeThreshold={{
-                    left: 30,
-                    right: 30
+                    left: 70,
+                    right: 70
                 }}
             >
             <View 
                 style={{
                     ...styles.container,
-                    backgroundColor: colors.password_category[this.props.item.category].light
+                    backgroundColor: 'white',
+                    elevation: 20,
+                    borderColor: colors.password_category[this.props.item.category].dark
                 }}
             >
-                <Chips item={this.props.item} />
-                <View style={styles.body}>
-                    
-                    {!this.state.showPassword && <OnlyLoginBody item={this.props.item} />}
-                    
-                    {this.state.showPassword && <LoginAndPasswordBody item={this.props.item} />}
-
+                <View style={styles.body}>           
+                    <LoginData 
+                        item={this.props.item}
+                        passwordVisible={this.state.showPassword}
+                    />
                     <ActionButtons 
                         item={this.props.item}
                         showPassword={this.state.showPassword}
                         toggleShowPassword={this.toggleShowPassword}
                     />
                 </View>
+                {/* <Chips item={this.props.item} /> */}
             </View>
             </SwipeItem>
           )
@@ -75,16 +74,18 @@ const styles = StyleSheet.create({
     container: {
         padding: 10,
         borderRadius: 5,
-        height: '100%'
+        height: '100%',
+        borderLeftWidth: 5
     },
     swipeItem: {
         margin: 10,
-        height: 110
+        marginHorizontal: 20,
+        height: 100
     },
     body: {
-        paddingTop: 10,
+        paddingTop: 5,
         flexDirection: 'row',
-        justifyContent: 'space-between'
+        justifyContent: 'space-between',
     },
     swipeButtonContainer: {
         height: '100%',

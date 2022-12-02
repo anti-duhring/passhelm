@@ -14,7 +14,7 @@ const FilterChip = (props: Props) => {
           leftElement={<Ionicons name="filter" size={20} color={colors.secondary} />}
           labelStyle={styles.labelStyle}
           containerStyle={styles.containerStyle}
-          backgroundColor={'#dedede33'}
+          backgroundColor={colors.highlight}
         />
   )
 }

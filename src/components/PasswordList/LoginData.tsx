@@ -2,6 +2,7 @@ import { StyleSheet, View } from 'react-native'
 import React from 'react'
 import TextStyled from '../TextStyled'
 import { colors } from '../../constants/colors'
+import Chips from './Chips'
 
 type Props = {
     item: any,

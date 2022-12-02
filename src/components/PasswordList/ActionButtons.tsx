@@ -20,14 +20,14 @@ const ActionButtons = (props: Props) => {
             <Ionicons 
                 name={props.showPassword ? 'eye-off-outline' : "eye-outline"} 
                 size={24} 
-                color={'black'} 
+                color={colors.black} 
             />
         </TouchableOpacity>
         <TouchableOpacity style={[styles.actionButton, { marginLeft: 10 }]}>
             <Ionicons 
                 name="copy-outline" 
                 size={24} 
-                color={'black'}
+                color={colors.black}
             />
         </TouchableOpacity>
     </View>

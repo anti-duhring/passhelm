@@ -50,6 +50,12 @@ class PasswordItem extends React.Component<Props> {
                     borderColor: colors.password_category[this.props.item.category].dark
                 }}
             >
+                <View 
+                    style={[
+                        styles.border,
+                        {backgroundColor: colors.password_category[this.props.item.category].dark}
+                    ]}
+                />
                 <View style={styles.body}>           
                     <LoginData 
                         item={this.props.item}
@@ -72,27 +78,40 @@ export default PasswordItem
 
 const styles = StyleSheet.create({
     container: {
-        padding: 10,
-        borderRadius: 5,
+        borderRadius: 20,
         height: '100%',
-        borderLeftWidth: 5
+        borderTopLeftRadius: 0,
+        borderBottomLeftRadius: 0,
+        flexDirection: 'row',
+        alignItems: 'center',
     },
     swipeItem: {
         margin: 10,
         marginHorizontal: 20,
-        height: 100
+        height: 110
     },
     body: {
+        width: '95%',
+        alignItems: 'center',
         paddingTop: 5,
         flexDirection: 'row',
-        justifyContent: 'space-between',
+        paddingHorizontal: 10,
     },
     swipeButtonContainer: {
-        height: '100%',
+        height: '90%',
         flexDirection: 'row',
         justifyContent: 'flex-start',
         alignItems: 'stretch',
         marginRight: 5,
         width: 200,
+    },
+    border: {
+        width: '2%',
+        backgroundColor: 'red',
+        height: '100%',
+        borderTopLeftRadius: 20,
+        borderBottomLeftRadius: 20,
+        justifyContent: 'center',
+        marginLeft: -5
     }
 })

@@ -36,6 +36,7 @@ const styles = StyleSheet.create({
         width: '100%',
         paddingHorizontal: 25,
         paddingVertical: 20,
+        paddingBottom: 17,
         alignItems: 'stretch',
         justifyContent: 'flex-start',
         flex: 1,

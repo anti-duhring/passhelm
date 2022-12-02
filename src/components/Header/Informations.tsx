@@ -39,7 +39,7 @@ const Informations = (props: Props) => {
             <TouchableOpacity
                 style={styles.icon}
             >
-                <Ionicons name="ios-person-outline" size={24} color={colors.secondary} />
+                <Ionicons name="person-outline" size={24} color={colors.secondary} />
             </TouchableOpacity> 
             <TouchableOpacity
                 style={styles.icon}
@@ -73,7 +73,8 @@ const styles = StyleSheet.create({
         color: 'white'
     },
     icons: {
-        flexDirection: 'row'
+        flexDirection: 'row',
+        marginTop: 10
     },
     icon: {
         marginLeft: 40

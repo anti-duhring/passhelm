@@ -1,7 +1,7 @@
 import { StyleSheet, Text, View } from 'react-native'
 import React from 'react'
 import { Chip } from 'react-native-ui-lib'
-import { colors } from '../../../constants/colors'
+import { colors } from '../../constants/colors'
 
 type Props = {
     item: any

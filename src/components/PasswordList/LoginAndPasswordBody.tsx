@@ -29,6 +29,7 @@ export default LoginAndPasswordBody
 const styles = StyleSheet.create({
     container: {
         flex: 3.5,
+        backgroundColor: 'blue'
     },
     title: {
         color: 'black'

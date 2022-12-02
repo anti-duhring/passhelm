@@ -31,7 +31,7 @@ const styles = StyleSheet.create({
         right: 20,
     },
     button: {
-        backgroundColor: colors.primary,
+        backgroundColor: colors.highlight,
         width: 60,
         height: 60,
         borderRadius: 30,

@@ -6,6 +6,7 @@ import { Ionicons } from '@expo/vector-icons';
 import FloatingButton from '../../components/FloatingButton';
 import { ScrollView } from '@gemcook/react-native-animated-scroll-view';
 import { colors } from '../../constants/colors';
+import Searchbar from '../../components/Searchbar';
 
 const maxHeaderHeight = 180;
 const minHeaderHeight = 70;
@@ -23,6 +24,7 @@ export default function App() {
     >
       
       <View style={styles.body}>
+        <Searchbar />
         <PasswordList />
       </View>
     </ScrollView>
@@ -40,6 +42,7 @@ const styles = StyleSheet.create({
   },
   body: {
     paddingTop: 10,
-    backgroundColor: 'white'
+    backgroundColor: 'white',
+    minHeight: 100,
   }
 });

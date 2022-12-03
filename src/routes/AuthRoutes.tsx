@@ -1,6 +1,8 @@
 import React from 'react';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import Home from '../pages/Home';
+import AddPassword from '../pages/AddPassword';
+import GoBack from '../components/HeaderButtons/GoBack';
 
 const Stack = createNativeStackNavigator();
 
@@ -15,6 +17,25 @@ const AuthRoutes = () => {
         <Stack.Screen
           name="Home"
           component={Home}
+        />
+        <Stack.Screen
+          name="AddPassword"
+          component={AddPassword}
+          options={({ navigation }) => ({
+            headerTransparent: true,
+            headerShown: true,
+            title: 'Cadastrar conta',
+            headerTitleAlign: 'center',
+            headerTitleStyle: {
+              fontFamily: 'MontserratMedium',
+              color: 'white'
+            },
+            headerLeft: () => 
+            <GoBack 
+              navigation={navigation}
+              color='black'
+            />
+          })}
         />
       </Stack.Navigator>
   );

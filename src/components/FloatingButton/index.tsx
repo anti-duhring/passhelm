@@ -5,7 +5,8 @@ import TextStyled from '../TextStyled'
 
 type Props = {
     icon?: React.ReactNode,
-    label?: string
+    label?: string,
+    onPress?: () => void 
 }
 
 const FloatingButton = (props: Props) => {
@@ -13,7 +14,7 @@ const FloatingButton = (props: Props) => {
     <View style={styles.container}>
         <TouchableOpacity 
             style={styles.button}
-            onPress={() => console.log('Pressed')}
+            onPress={props.onPress}
         >
             {props.icon}
             <TextStyled>{props.label}</TextStyled>

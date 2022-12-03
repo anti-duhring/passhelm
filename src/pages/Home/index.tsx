@@ -11,7 +11,7 @@ import Searchbar from '../../components/Searchbar';
 const maxHeaderHeight = 180;
 const minHeaderHeight = 70;
 
-export default function App() {
+const Home = ({ navigation }) => {
   const [isLoading, setIsLoading] = useState<boolean>(true);
 
   return (
@@ -30,10 +30,13 @@ export default function App() {
     </ScrollView>
       <FloatingButton
         icon={<Ionicons name="add" size={30} color="white" />}
+        onPress={() => navigation.navigate('AddPassword')}
       />
     </View>
   );
 }
+
+export default Home;
 
 const styles = StyleSheet.create({
   container: {

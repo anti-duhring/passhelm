@@ -1,5 +1,5 @@
 import { ChipProps } from "react-native-ui-lib"
-import { TCategory } from "../pages/AddPassword/Form/category"
+import { TCategory } from "../context/createCategory/createCategory"
 
 export const returnAllChategories = (
         categories: TCategory[],

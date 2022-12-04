@@ -4,21 +4,24 @@ import { colors } from '../../constants/colors'
 import { StatusBar } from 'expo-status-bar'
 import TextStyled from '../../components/TextStyled'
 import Form from './Form'
+import CreateCategoryProvider from '../../context/createCategory'
 
 type Props = {}
 
 const AddPassword = (props: Props) => {
   return (
-    <View style={styles.container}>
-      <StatusBar 
-        style='light' 
-        backgroundColor={'black'}
-        translucent={false}
-      />
-      <View style={styles.body}>
-        <Form />
+    <CreateCategoryProvider>
+      <View style={styles.container}>
+        <StatusBar 
+          style='light' 
+          backgroundColor={'black'}
+          translucent={false}
+        />
+        <View style={styles.body}>
+          <Form />
+        </View>
       </View>
-    </View>
+    </CreateCategoryProvider>
   )
 }
 

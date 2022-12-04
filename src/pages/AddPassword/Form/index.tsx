@@ -1,45 +1,22 @@
 import { StyleSheet, KeyboardAvoidingView, View } from 'react-native'
-import React, { useEffect, useState } from 'react'
+import React, { useContext } from 'react'
 import { colors } from '../../../constants/colors'
-import { Button, ChipProps } from 'react-native-ui-lib';
+import { Button } from 'react-native-ui-lib';
 import TextFieldStyled from './TextFieldStyled';
 import Safe from '../../../components/Svg/Safe';
-import { passwordCategories } from '../../../constants/password';
 import AddCategory from './AddCategory';
-import TextStyled from '../../../components/TextStyled';
-import { returnAllChategories } from '../../../functions/AddCategory';
-import { TCategory } from './category';
+import { CreateCategoryContext } from '../../../context/createCategory';
+import { TCreateCategoryContext } from '../../../context/createCategory/createCategory';
 
 type Props = {}
 
 const Form = (props: Props) => {
-    const [loginError, setLoginError] = useState<boolean>(false);
-    const [passwordError, setPasswordError] = useState<boolean>(false);
-    const [chosenCategory, setChosenCategory] = useState<TCategory | null>(null);
-    const [categories, setCategories] = useState<ChipProps[] | null>(null);
-    const [chosenColor, setChosenColor] = useState<string>('#075ff9')
-
-    const validateLogin = (value: string) => {
-        return true
-    }
-    const validatePassword = (value: string) => {
-        return true
-    }
-    const handleChangeChips = (newChips: ChipProps[]) => {
-        let newCategories = [...newChips]
-        newCategories[newCategories.length - 1].backgroundColor = '#000000'
-
-        setCategories([...newCategories])
-    }
-
-    useEffect(() => {
-        setCategories(
-            returnAllChategories(
-                passwordCategories,
-                chosenCategory,
-                setChosenCategory
-        ))
-    },[chosenCategory])
+    const {
+        validateLogin,
+        validatePassword,
+        loginError,
+        passwordError,
+    } = useContext(CreateCategoryContext) as TCreateCategoryContext;
 
   return (
     <>
@@ -63,13 +40,7 @@ const Form = (props: Props) => {
                 validationMessage={['Preencha a senha', 'Preencha uma senha válida']}
                 error={passwordError}
             />
-            <AddCategory
-                categories={categories}
-                onChange={handleChangeChips}
-                chosenCategory={chosenCategory}
-                chosenColor={chosenColor}
-                setChosenColor={setChosenColor}
-            />
+            <AddCategory />
         </View>
         <Button 
             enableShadow
@@ -77,7 +48,6 @@ const Form = (props: Props) => {
             size={Button.sizes.large} 
             backgroundColor={colors.highlight}
             style={styles.button}
-            
         />
     </KeyboardAvoidingView>
     </>

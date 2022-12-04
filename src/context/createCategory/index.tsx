@@ -1,0 +1,95 @@
+import React, { createContext, useState, useEffect } from 'react';
+import { ChipProps, Colors } from 'react-native-ui-lib';
+import { colors } from '../../constants/colors';
+import { passwordCategories } from '../../constants/password';
+import { returnAllChategories } from '../../functions/AddCategory';
+import { TCategory, TCreateCategoryContext } from './createCategory';
+
+export const CreateCategoryContext = createContext<TCreateCategoryContext | null>(null);
+
+const CreateCategoryProvider = ({ children }) => {
+    const [loginError, setLoginError] = useState<boolean>(false);
+    const [passwordError, setPasswordError] = useState<boolean>(false);
+    const [chosenCategory, setChosenCategory] = useState<TCategory | null>(null);
+    const [categories, setCategories] = useState<ChipProps[] | null>(null);
+    const [chosenColor, setChosenColor] = useState<string>('#075ff9');
+    const [showDialog, setShowDialog] = useState<boolean>(false);
+
+    const categoriesColors = [
+        colors.highlight, 
+        Colors.green30, 
+        Colors.yellow30, 
+        Colors.red30,
+        Colors.blue30,
+        Colors.purple30,
+        Colors.cyan30,
+        Colors.dark,
+        Colors.violet30,
+        Colors.grey30,
+        Colors.orange30
+    ]
+
+    const handleClickChip = (category: any) => {
+        setChosenCategory(old => ({...category}))
+    }
+
+    const validateLogin = (value: string) => {
+        return true
+    }
+    const validatePassword = (value: string) => {
+        return true
+    }
+    const handleChangeChips = (newChips: ChipProps[]) => {
+        let newCategories = [...newChips]
+        const newCategory = newCategories[newCategories.length - 1]
+
+        newCategory.backgroundColor = chosenColor
+        newCategory.dismissColor = 'white'
+        newCategory.labelStyle = { color: 'white' }
+        newCategory.containerStyle = { borderColor: chosenColor }
+        newCategory.onPress = () => handleClickChip(newCategory)
+
+        setCategories([...newCategories])
+    }
+
+    useEffect(() => {
+        if(chosenCategory) {
+
+            return
+        } 
+
+        setCategories(
+            returnAllChategories(
+                passwordCategories,
+                chosenCategory,
+                setChosenCategory
+        ))
+    },[chosenCategory])
+
+    return (
+        <CreateCategoryContext.Provider 
+            value={{
+                loginError,
+                setLoginError,
+                passwordError,
+                setPasswordError,
+                chosenCategory,
+                setChosenCategory,
+                categories,
+                setCategories,
+                chosenColor,
+                setChosenColor,
+                showDialog,
+                setShowDialog,
+                categoriesColors,
+                validateLogin,
+                validatePassword,
+                handleChangeChips
+            }}
+        >
+            {children}
+        </CreateCategoryContext.Provider>
+    )
+}
+
+export default CreateCategoryProvider;

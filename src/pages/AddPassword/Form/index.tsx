@@ -1,16 +1,23 @@
 import { StyleSheet, KeyboardAvoidingView, View } from 'react-native'
-import React, { useState } from 'react'
-import { colors } from '../../constants/colors'
-import { Button, Incubator } from 'react-native-ui-lib';
+import React, { useEffect, useState } from 'react'
+import { colors } from '../../../constants/colors'
+import { Button, ChipProps } from 'react-native-ui-lib';
 import TextFieldStyled from './TextFieldStyled';
-import Safe from '../../components/Svg/Safe';
-const { ChipsInput } = Incubator;
+import Safe from '../../../components/Svg/Safe';
+import { passwordCategories } from '../../../constants/password';
+import AddCategory from './AddCategory';
+import TextStyled from '../../../components/TextStyled';
+import { returnAllChategories } from '../../../functions/AddCategory';
+import { TCategory } from './category';
 
 type Props = {}
 
 const Form = (props: Props) => {
     const [loginError, setLoginError] = useState<boolean>(false);
     const [passwordError, setPasswordError] = useState<boolean>(false);
+    const [chosenCategory, setChosenCategory] = useState<TCategory | null>(null);
+    const [categories, setCategories] = useState<ChipProps[] | null>(null);
+    const [chosenColor, setChosenColor] = useState<string>('#075ff9')
 
     const validateLogin = (value: string) => {
         return true
@@ -18,21 +25,37 @@ const Form = (props: Props) => {
     const validatePassword = (value: string) => {
         return true
     }
+    const handleChangeChips = (newChips: ChipProps[]) => {
+        let newCategories = [...newChips]
+        newCategories[newCategories.length - 1].backgroundColor = '#000000'
+
+        setCategories([...newCategories])
+    }
+
+    useEffect(() => {
+        setCategories(
+            returnAllChategories(
+                passwordCategories,
+                chosenCategory,
+                setChosenCategory
+        ))
+    },[chosenCategory])
+
   return (
+    <>
+    <View style={styles.icon}>
+        <Safe width={50} height={50} />
+    </View>
     <KeyboardAvoidingView 
         style={styles.container}
         contentContainerStyle={{ flex: 1}}
     >
-        <View style={styles.icon}>
-            <Safe width={50} height={50} />
-        </View>
         <View style={styles.fieldContainer}>
             <TextFieldStyled
                 placeholder='Login da conta'
                 validate={['required', (value) => validateLogin(value)]}
                 validationMessage={['Preencha o login', 'Preencha um login válido']}
                 error={loginError}
-                maxLength={40}
             />
             <TextFieldStyled
                 placeholder='Senha'
@@ -40,9 +63,12 @@ const Form = (props: Props) => {
                 validationMessage={['Preencha a senha', 'Preencha uma senha válida']}
                 error={passwordError}
             />
-            <ChipsInput
-                placeholder={'Escolha uma categoria'}
-                chips={[{label: 'Trabalho'}, {label: 'Pessoal'}, {label: 'Rede Social'}]}
+            <AddCategory
+                categories={categories}
+                onChange={handleChangeChips}
+                chosenCategory={chosenCategory}
+                chosenColor={chosenColor}
+                setChosenColor={setChosenColor}
             />
         </View>
         <Button 
@@ -51,8 +77,10 @@ const Form = (props: Props) => {
             size={Button.sizes.large} 
             backgroundColor={colors.highlight}
             style={styles.button}
+            
         />
     </KeyboardAvoidingView>
+    </>
   )
 }
 
@@ -65,7 +93,8 @@ const styles = StyleSheet.create({
         padding: 15,
         borderRadius: 20,
         marginTop: -70,
-        height: 300,
+        marginHorizontal: 20,
+        height: 350,
         justifyContent: 'space-between',
         borderColor: 'black',
         borderWidth: 0,
@@ -89,15 +118,10 @@ const styles = StyleSheet.create({
     },
     icon: {
         position: 'absolute',
-        left: '45%',
-        top: -25,
-        // backgroundColor: 'white',
-        // width: 50,
-        // height: 50,
-        // justifyContent: 'center',
-        // alignItems: 'center',
-        // borderRadius: 50,
-        // borderColor: 'black',
-        // borderWidth: 2
+        top: -100,
+        width: '100%',
+        zIndex: 9999,
+        justifyContent: 'center',
+        alignItems: 'center'
     }
 })

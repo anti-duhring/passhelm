@@ -33,6 +33,6 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: colors.secondary,
     marginTop: 200,
-    paddingHorizontal: 20,
+    position: 'relative'
   }
 })

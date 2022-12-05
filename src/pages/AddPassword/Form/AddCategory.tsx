@@ -29,7 +29,6 @@ const AddCategory = (props: Props) => {
             style={styles.chip}
           >
             <Chip 
-              useSizeAsMinimum
               {...category}
             />
           </View>
@@ -59,9 +58,13 @@ const styles = StyleSheet.create({
     fontFamily: 'MontserratRegular',
   },
   container: {
-    flexDirection: 'row'
+    flexDirection: 'row',
+    flexWrap: 'wrap',
+    justifyContent: 'flex-start',
+    alignItems: 'center'
   },
   chip: {
-    marginRight: 10
+    marginRight: 10,
+    marginTop: 10
   }
 })

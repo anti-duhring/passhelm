@@ -11,6 +11,7 @@ const CreateCategoryProvider = ({ children }) => {
     const [loginError, setLoginError] = useState<boolean>(false);
     const [passwordError, setPasswordError] = useState<boolean>(false);
     const [chosenCategory, setChosenCategory] = useState<TCategory | null>(null);
+    const [allPasswordCategories, setAllPasswordCategories] = useState<TCategory[] | null>([...passwordCategories])
     const [categories, setCategories] = useState<ChipProps[] | null>(null);
     const [chosenColor, setChosenColor] = useState<string>('#075ff9');
     const [showDialog, setShowDialog] = useState<boolean>(false);
@@ -20,7 +21,6 @@ const CreateCategoryProvider = ({ children }) => {
         Colors.green30, 
         Colors.yellow30, 
         Colors.red30,
-        Colors.blue30,
         Colors.purple30,
         Colors.cyan30,
         Colors.dark,
@@ -41,26 +41,36 @@ const CreateCategoryProvider = ({ children }) => {
     }
     const handleChangeChips = (newChips: ChipProps[]) => {
         let newCategories = [...newChips]
-        const newCategory = newCategories[newCategories.length - 1]
+        let highestID = Math.max(...allPasswordCategories.map((cat) => cat.id));
+        const newCategory: ChipProps = {
+            ...newCategories.pop(),
+            backgroundColor: chosenColor,
+            dismissColor: 'white',
+            labelStyle: { color: 'white' },
+            containerStyle: { borderColor: chosenColor },
+        }
+        const newPasswordCategory: TCategory = {
+            label: newCategory.label,
+            id: highestID + 1,
+            color: chosenColor
+        }
 
-        newCategory.backgroundColor = chosenColor
-        newCategory.dismissColor = 'white'
-        newCategory.labelStyle = { color: 'white' }
-        newCategory.containerStyle = { borderColor: chosenColor }
-        newCategory.onPress = () => handleClickChip(newCategory)
+        newCategory.onPress = () => handleClickChip(newPasswordCategory);
 
-        setCategories([...newCategories])
+        setAllPasswordCategories(oldCategories => [
+            ...oldCategories,
+            newPasswordCategory
+        ])
+        setCategories([
+            ...newCategories,
+            newCategory
+        ])
     }
 
     useEffect(() => {
-        if(chosenCategory) {
-
-            return
-        } 
-
         setCategories(
             returnAllChategories(
-                passwordCategories,
+                allPasswordCategories,
                 chosenCategory,
                 setChosenCategory
         ))

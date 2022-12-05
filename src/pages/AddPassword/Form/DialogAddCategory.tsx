@@ -1,16 +1,17 @@
 import { StyleSheet, View, TouchableOpacity } from 'react-native'
-import React, { useContext } from 'react'
+import React, { useContext, useState } from 'react'
 import { 
   Incubator, 
   Colors, 
   ColorPalette, 
-  Button
+  Button,
+  ChipProps
 } from 'react-native-ui-lib';
 import { colors } from '../../../constants/colors';
 import { AntDesign } from '@expo/vector-icons';
 import TextStyled from '../../../components/TextStyled';
 import { CreateCategoryContext } from '../../../context/createCategory';
-import { TCreateCategoryContext } from '../../../context/createCategory/createCategory';
+import { TCategory, TCreateCategoryContext } from '../../../context/createCategory/createCategory';
 const { ChipsInput } = Incubator;
 
 type Props = {
@@ -18,8 +19,10 @@ type Props = {
 }
 
 const DialogAddCategory = (props: Props) => {
+  const [categoryLabel, setCategoryLabel] = useState<string>('')
     const { 
         categories,
+        setCategories,
         setShowDialog,
         chosenColor,
         setChosenColor,
@@ -29,6 +32,17 @@ const DialogAddCategory = (props: Props) => {
 
     const onChange = (e: any) => {
         handleChangeChips(e);
+    }
+
+    const onSubmit = () => {
+      let newCategories: ChipProps[] = [
+        ...categories,
+        {
+          label: categoryLabel,
+        }
+      ]
+      handleChangeChips(newCategories)
+
     }
 
     return (
@@ -51,7 +65,9 @@ const DialogAddCategory = (props: Props) => {
           <ChipsInput
             placeholder={'Nome da categoria...'}
             chips={categories}
+            value={categoryLabel}
             onChange={onChange}
+            onChangeText={(value: string) => setCategoryLabel(value)}
             style={styles.textField}
             containerStyle={{
               minHeight: 100
@@ -70,7 +86,7 @@ const DialogAddCategory = (props: Props) => {
             size={Button.sizes.large} 
             backgroundColor={colors.primary}
             style={styles.button}
-              
+            onPress={onSubmit}
           />
         </View>
       </View>

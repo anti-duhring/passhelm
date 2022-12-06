@@ -29,6 +29,9 @@ const AddCategory = (props: Props) => {
             style={styles.chip}
           >
             <Chip 
+              size={{
+                height: 30
+              }}
               {...category}
             />
           </View>

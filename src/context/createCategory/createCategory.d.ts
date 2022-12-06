@@ -14,7 +14,8 @@ export interface TCreateCategoryContext {
     categoriesColors: string[],
     validateLogin: (value: string) => boolean,
     validatePassword: (value: string) => boolean,
-    handleChangeChips: (newChips: ChipProps[]) => void
+    handleChangeChips: (newChips: ChipProps[]) => void,
+    handleDeleteChips: (deletedChip: ChipProps) => void
 }
 
 export type TCategory = {

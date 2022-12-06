@@ -9,7 +9,9 @@ type Props = {
     validationMessage?: string[],
     validate?: (string | boolean | ((value: string) => boolean))[],
     error: boolean,
-    maxLength?: number
+    maxLength?: number,
+    value?: string,
+    onChange?: (e: any) => void
 }
 
 const TextFieldStyled = (props: Props) => {
@@ -32,6 +34,8 @@ const TextFieldStyled = (props: Props) => {
         validate={props.validate}
         validationMessage={props.validationMessage}
         showCharCounter={Boolean(props.maxLength)}
+        value={props.value}
+        onChangeText={props.onChange}
         validateOnChange
         fieldStyle={[
             styles.textinput,

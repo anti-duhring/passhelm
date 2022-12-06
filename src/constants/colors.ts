@@ -6,7 +6,8 @@ export const colors = {
     green: '#3aa73a',
     gray: {
         main: '#ababab',
-        light: '#f3f3f3'
+        light: '#f3f3f3',
+        transparent: '#ababab80'
     },
     black: '#000000',
     red: '#ff7a7a',

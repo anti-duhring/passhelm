@@ -8,10 +8,14 @@ import { colors } from '../../constants/colors';
 import TextStyled from '../TextStyled';
 import { Avatar, Colors } from 'react-native-ui-lib';
 import { Ionicons } from '@expo/vector-icons';
+import { useNavigation } from '@react-navigation/native';
 
-type Props = {}
+type Props = {
+}
 
 const Informations = (props: Props) => {
+    const navigation = useNavigation();
+
   return (
     <View style={styles.container}>
         <View style={styles.informations}>
@@ -38,6 +42,7 @@ const Informations = (props: Props) => {
         <View style={styles.icons}>
             <TouchableOpacity
                 style={styles.icon}
+                onPress={() => navigation.navigate('Profile')}
             >
                 <Ionicons name="person-outline" size={24} color={colors.secondary} />
             </TouchableOpacity> 

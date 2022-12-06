@@ -29,6 +29,12 @@ const Form = (props: Props) => {
     >
         <View style={styles.fieldContainer}>
             <TextFieldStyled
+                placeholder='Título'
+                validate={['required', (value) => validateLogin(value)]}
+                validationMessage={['Preencha o login', 'Preencha um login válido']}
+                error={loginError}
+            />
+            <TextFieldStyled
                 placeholder='Login da conta'
                 validate={['required', (value) => validateLogin(value)]}
                 validationMessage={['Preencha o login', 'Preencha um login válido']}
@@ -64,7 +70,7 @@ const styles = StyleSheet.create({
         borderRadius: 20,
         marginTop: -70,
         marginHorizontal: 20,
-        height: 350,
+        minHeight: 350,
         justifyContent: 'space-between',
         borderColor: 'black',
         borderWidth: 0,

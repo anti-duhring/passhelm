@@ -39,6 +39,17 @@ const CreateCategoryProvider = ({ children }) => {
     const validatePassword = (value: string) => {
         return true
     }
+
+    const handleDeleteChips = (deletedChip: ChipProps) => {
+
+        setAllPasswordCategories(oldCategories => [
+            ...oldCategories.filter(category => category.label != deletedChip.label)
+        ])
+        setCategories(oldCategories => [
+            ...oldCategories.filter(category => category.label != deletedChip.label)
+        ])        
+    }
+
     const handleChangeChips = (newChips: ChipProps[]) => {
         let newCategories = [...newChips]
         let highestID = Math.max(...allPasswordCategories.map((cat) => cat.id));
@@ -94,7 +105,8 @@ const CreateCategoryProvider = ({ children }) => {
                 categoriesColors,
                 validateLogin,
                 validatePassword,
-                handleChangeChips
+                handleChangeChips,
+                handleDeleteChips
             }}
         >
             {children}

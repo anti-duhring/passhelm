@@ -5,13 +5,15 @@ import {
   Colors, 
   ColorPalette, 
   Button,
-  ChipProps
+  ChipProps,
+  Chip
 } from 'react-native-ui-lib';
 import { colors } from '../../../constants/colors';
 import { AntDesign } from '@expo/vector-icons';
 import TextStyled from '../../../components/TextStyled';
 import { CreateCategoryContext } from '../../../context/createCategory';
 import { TCategory, TCreateCategoryContext } from '../../../context/createCategory/createCategory';
+import TextFieldStyled from './TextFieldStyled';
 const { ChipsInput } = Incubator;
 
 type Props = {
@@ -27,12 +29,9 @@ const DialogAddCategory = (props: Props) => {
         chosenColor,
         setChosenColor,
         handleChangeChips,
+        handleDeleteChips,
         categoriesColors
     } = useContext(CreateCategoryContext) as TCreateCategoryContext;
-
-    const onChange = (e: any) => {
-        handleChangeChips(e);
-    }
 
     const onSubmit = () => {
       let newCategories: ChipProps[] = [
@@ -62,16 +61,29 @@ const DialogAddCategory = (props: Props) => {
           </TouchableOpacity>
         </View>
         <View style={styles.dialogBody}>
-          <ChipsInput
-            placeholder={'Nome da categoria...'}
-            chips={categories}
-            value={categoryLabel}
-            onChange={onChange}
-            onChangeText={(value: string) => setCategoryLabel(value)}
-            style={styles.textField}
-            containerStyle={{
-              minHeight: 100
-            }}
+          <View style={styles.chipsBody}>
+            {
+              categories?.map((category, index) => 
+                <View
+                  key={index}
+                  style={styles.chip}
+                >
+                  <Chip
+                    size={{
+                      height: 30
+                    }}
+                    onDismiss={() => handleDeleteChips(category)}
+                    {...category}
+                  />
+                </View>
+              )
+            }
+          </View>
+          <TextFieldStyled
+              placeholder='Nome da categoria'
+              value={categoryLabel}
+              onChange={(e: any) => setCategoryLabel(e)}
+              error={false}
           />
           <ColorPalette
             colors={categoriesColors}
@@ -105,9 +117,9 @@ const DialogAddCategory = (props: Props) => {
         paddingTop: 10
       },
       dialogTitle: {
-        borderColor: colors.gray.main,
+        borderColor: colors.gray.transparent,
         borderBottomWidth: .3,
-        paddingBottom: 5,
+        paddingBottom: 10,
         flexDirection: 'row',
         justifyContent: 'space-between',
         alignItems: 'center'
@@ -125,5 +137,13 @@ const DialogAddCategory = (props: Props) => {
       },
       textField: {
         fontFamily: 'MontserratRegular',
+      },
+      chip: {
+        marginRight: 10,
+        marginTop: 10
+      },
+      chipsBody: {
+        flexDirection: 'row',
+        flexWrap: 'wrap'
       }
   })

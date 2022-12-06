@@ -13,13 +13,13 @@ export const returnAllChategories = (
     return categories.map(category => {
         return {
             label: category.label,
-            backgroundColor: category.color,
-            dismissColor: 'white',
+            backgroundColor: chosenCategory?.id == category.id? 'white' : category.color,
+            dismissColor: chosenCategory?.id == category.id? category.color : 'white',
             labelStyle: {
-                color: 'white'
+                color: chosenCategory?.id == category.id? category.color : 'white'
             },
             containerStyle: {
-                borderColor: chosenCategory?.id == category.id? 'black' : category.color 
+                borderColor: category.color 
             },
             onPress: () => handleClickChip(category)
         }

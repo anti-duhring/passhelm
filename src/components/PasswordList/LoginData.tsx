@@ -28,7 +28,7 @@ const OnlyLoginBody = (props: Props) => {
         >
             {props.passwordVisible? 
                 props.item.password :
-                new Array(props.item.password.length).fill('*').join('')
+                new Array(props.item.password.length).fill('•').join('')
             }
         </TextStyled>
     </View>

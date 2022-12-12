@@ -1,27 +1,42 @@
 import { StyleSheet, Text, View } from 'react-native'
-import React from 'react';
+import React, { useState } from 'react';
 import { Avatar as AvatarE } from 'react-native-ui-lib';
 import { colors } from '../../constants/colors';
+import { MaterialIcons } from '@expo/vector-icons';
+import ImageView from "react-native-image-viewing";
 
 type Props = {}
 
 const Avatar = (props: Props) => {
+    const [imageOpened, setImageOpened] = useState(false);
+
   return (
     <View style={styles.container}>
         <AvatarE 
             source={require('../../../assets/avatar.jpg')} 
             label={'MV'}
-            size={100} 
+            size={80} 
             labelColor={colors.primary}
             badgeProps={{
-                backgroundColor: colors.green,
+                backgroundColor: colors.highlight,
                 borderColor: 'black',
-                borderWidth: 2
+                borderWidth: 2,
+                size: 35,
+                customElement: <MaterialIcons name="photo-camera" size={20} color={colors.secondary} />
             }}
             imageStyle={{
                 borderColor: 'black',
                 borderWidth: 2,
             }}
+            onPress={() => setImageOpened(true)}
+        />
+        <ImageView
+            images={[require('../../../assets/avatar.jpg')]}
+            imageIndex={0}
+            swipeToCloseEnabled
+            doubleTapToZoomEnabled
+            visible={imageOpened}
+            onRequestClose={() => setImageOpened(false)}
         />
     </View>
   )
@@ -31,9 +46,9 @@ export default Avatar
 
 const styles = StyleSheet.create({
     container: {
-        marginTop: -60,
+        marginTop: -55,
         width: '100%',
         justifyContent: 'center',
-        alignItems: 'center'
+        alignItems: 'center',
     }
 })

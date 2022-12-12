@@ -4,11 +4,13 @@ export const colors = {
     secondary: '#FFFFFF',
     highlight: '#075ff9',
     green: '#3aa73a',
+    white: '#FFFFFF',
     gray: {
         main: '#ababab',
         light: '#f3f3f3',
         transparent: '#ababab80'
     },
+    transparent: '#ababab33',
     black: '#000000',
     red: '#ff7a7a',
     blue: '#7a7fff',

@@ -1,10 +1,11 @@
-import { StyleSheet, Text, View } from 'react-native'
+import { StyleSheet, KeyboardAvoidingView, View, ViewStyle } from 'react-native'
 import React from 'react'
 import { colors } from '../../constants/colors'
 import { StatusBar } from 'expo-status-bar'
 
 type Props = {
-    children: React.ReactNode
+    children: React.ReactNode,
+    style?: ViewStyle
 }
 
 const PageContainer = (props: Props) => {
@@ -16,9 +17,12 @@ const PageContainer = (props: Props) => {
             translucent={false}
         />
         <View style={styles.body}>
-            <View style={styles.content}>
+            <KeyboardAvoidingView 
+                style={[styles.content, props.style]}
+                behavior='height'
+            >
                 {props.children}
-            </View>
+            </KeyboardAvoidingView>
         </View>
     </View>
   )

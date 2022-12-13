@@ -1,9 +1,10 @@
 import { StyleSheet, Text, View } from 'react-native'
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Avatar as AvatarE } from 'react-native-ui-lib';
 import { colors } from '../../constants/colors';
 import { MaterialIcons } from '@expo/vector-icons';
 import ImageView from "react-native-image-viewing";
+import * as NavigationBar from 'expo-navigation-bar';
 
 type Props = {}
 

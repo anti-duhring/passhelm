@@ -4,6 +4,7 @@ import Home from '../pages/Home';
 import AddPassword from '../pages/AddPassword';
 import GoBack from '../components/HeaderButtons/GoBack';
 import Profile from '../pages/Profile';
+import Settings from '../pages/Settings';
 
 const Stack = createNativeStackNavigator();
 
@@ -46,6 +47,25 @@ const AuthRoutes = () => {
             headerTransparent: true,
             headerShown: true,
             title: 'Meu perfil',
+            headerTitleAlign: 'center',
+            headerTitleStyle: {
+              fontFamily: 'MontserratMedium',
+              color: 'white'
+            },
+            headerLeft: () => 
+            <GoBack 
+              navigation={navigation}
+              color='black'
+            />
+          })}
+        />
+        <Stack.Screen
+          name="Settings"
+          component={Settings}
+          options={({ navigation }) => ({
+            headerTransparent: true,
+            headerShown: true,
+            title: 'Configurações',
             headerTitleAlign: 'center',
             headerTitleStyle: {
               fontFamily: 'MontserratMedium',

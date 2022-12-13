@@ -42,12 +42,13 @@ const Informations = (props: Props) => {
         <View style={styles.icons}>
             <TouchableOpacity
                 style={styles.icon}
-                onPress={() => navigation.navigate('Profile')}
+                onPress={() => navigation.navigate('Profile' as never)}
             >
                 <Ionicons name="person-outline" size={24} color={colors.secondary} />
             </TouchableOpacity> 
             <TouchableOpacity
                 style={styles.icon}
+                onPress={() => navigation.navigate('Settings' as never)}
             >
                 <Ionicons name="settings-outline" size={24} color={colors.secondary} />
             </TouchableOpacity> 

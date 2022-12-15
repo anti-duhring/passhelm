@@ -1,14 +1,23 @@
-import { StyleSheet, Text, View } from 'react-native'
+import { StyleSheet, View } from 'react-native'
 import React from 'react'
-import { colors } from '../../constants/colors'
+import { colors } from '../../../constants/colors'
 import { StatusBar } from 'expo-status-bar'
-import TextStyled from '../../components/TextStyled'
 import Form from './Form'
-import CreateCategoryProvider from '../../context/createCategory'
+import CreateCategoryProvider from '../../../context/createCategory'
+import { ParamListBase, RouteProp, useRoute } from '@react-navigation/native'
 
-type Props = {}
+type Props = {
+}
 
-const AddPassword = (props: Props) => {
+type TRoute = RouteProp<ParamListBase, string> & {
+  params: {
+    item: any
+  }
+}
+
+const EditPassword = (props: Props) => {
+  const route: TRoute = useRoute();
+
   return (
     <CreateCategoryProvider>
       <View style={styles.container}>
@@ -18,14 +27,14 @@ const AddPassword = (props: Props) => {
           translucent={false}
         />
         <View style={styles.body}>
-          <Form />
+          <Form item={route.params.item} />
         </View>
       </View>
     </CreateCategoryProvider>
   )
 }
 
-export default AddPassword
+export default EditPassword
 
 const styles = StyleSheet.create({
   container: {

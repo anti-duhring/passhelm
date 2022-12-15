@@ -1,10 +1,10 @@
 import { StyleSheet, KeyboardAvoidingView, View } from 'react-native'
 import React, { useContext } from 'react'
-import { colors } from '../../../constants/colors'
+import { colors } from '../../../constants/colors';
 import { Button } from 'react-native-ui-lib';
-import TextFieldStyled from './TextFieldStyled';
+import TextFieldStyled from '../components/TextFieldStyled';
 import Safe from '../../../components/Svg/Safe';
-import AddCategory from './AddCategory';
+import AddCategory from '../components/AddCategory';
 import { CreateCategoryContext } from '../../../context/createCategory';
 import { TCreateCategoryContext } from '../../../context/createCategory/createCategory';
 

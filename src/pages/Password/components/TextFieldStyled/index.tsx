@@ -1,6 +1,6 @@
 import { LayoutChangeEvent, StyleSheet} from 'react-native'
 import React, { useRef, useState } from 'react'
-import { colors } from '../../../constants/colors'
+import { colors } from '../../../../constants/colors'
 import { Incubator } from 'react-native-ui-lib';
 const { TextField } = Incubator;
 
@@ -34,7 +34,7 @@ const TextFieldStyled = (props: Props) => {
         validate={props.validate}
         validationMessage={props.validationMessage}
         showCharCounter={Boolean(props.maxLength)}
-        value={props.value}
+        defaultValue={props.value}
         onChangeText={props.onChange}
         validateOnChange
         fieldStyle={[

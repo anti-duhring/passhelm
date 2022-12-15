@@ -4,15 +4,21 @@ import { colors } from '../../constants/colors';
 import TextStyled from '../TextStyled';
 import { Ionicons } from '@expo/vector-icons';
 import { Feather } from '@expo/vector-icons';
+import { useNavigation } from '@react-navigation/native';
 
 type Props = {
+    item: any;
 }
 
-const SwipeButtons = (props: any) => {
+const SwipeButtons = (props: Props) => {
+    const navigation = useNavigation()
+
   return (
         <>
             <TouchableOpacity
-                onPress={() => console.log('left button clicked')}
+                onPress={() => navigation.navigate('EditPassword' as never, {
+                    item: props.item
+                } as never)}
                 style={[styles.button]}
             >
                 <Feather name="edit" size={24} color={colors.primary} />

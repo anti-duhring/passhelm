@@ -8,12 +8,12 @@ import {
   ChipProps,
   Chip
 } from 'react-native-ui-lib';
-import { colors } from '../../../constants/colors';
+import { colors } from '../../../../constants/colors';
 import { AntDesign } from '@expo/vector-icons';
-import TextStyled from '../../../components/TextStyled';
-import { CreateCategoryContext } from '../../../context/createCategory';
-import { TCategory, TCreateCategoryContext } from '../../../context/createCategory/createCategory';
-import TextFieldStyled from './TextFieldStyled';
+import TextStyled from '../../../../components/TextStyled';
+import { CreateCategoryContext } from '../../../../context/createCategory';
+import { TCategory, TCreateCategoryContext } from '../../../../context/createCategory/createCategory';
+import TextFieldStyled from '../TextFieldStyled';
 const { ChipsInput } = Incubator;
 
 type Props = {

@@ -6,8 +6,8 @@ import {
   Dialog,
 } from 'react-native-ui-lib';
 import { Entypo } from '@expo/vector-icons';
-import { CreateCategoryContext } from '../../../context/createCategory';
-import { TCreateCategoryContext } from '../../../context/createCategory/createCategory';
+import { CreateCategoryContext } from '../../../../context/createCategory';
+import { TCreateCategoryContext } from '../../../../context/createCategory/createCategory';
 import DialogAddCategory from './DialogAddCategory';
 
 type Props = {

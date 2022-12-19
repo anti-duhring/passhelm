@@ -1,7 +1,6 @@
 import { StyleSheet, View, TouchableOpacity } from 'react-native'
 import React, { useContext } from 'react'
 import { 
-  Chip,
   PanningProvider,
   Dialog,
 } from 'react-native-ui-lib';
@@ -10,13 +9,13 @@ import { CreateCategoryContext } from '../../../../context/createCategory';
 import { TCreateCategoryContext } from '../../../../context/createCategory/createCategory';
 import DialogAddCategory from './DialogAddCategory';
 import { PasswordDataContext } from '../../../../context/passwordData';
+import CarouselChips from './CarouselChips';
 
 type Props = {
 }
 
 const AddCategory = (props: Props) => {
   const { 
-    categories,
     showDialog,
     setShowDialog
   } = useContext(CreateCategoryContext) as TCreateCategoryContext;
@@ -26,21 +25,9 @@ const AddCategory = (props: Props) => {
 
   return (
     <View style={styles.container}>
-      {
-        categories?.map((category, index) => 
-          <TouchableOpacity
-            key={index}
-            style={styles.chip}
-          >
-            <Chip 
-              size={{
-                height: 30
-              }}
-              {...category}
-            />
-          </TouchableOpacity>
-        )
-      }
+      <View>
+        <CarouselChips />
+      </View>
       <TouchableOpacity
         onPress={() => setShowDialog(value => !value)}
         disabled={showDialog}
@@ -65,14 +52,14 @@ const styles = StyleSheet.create({
     fontFamily: 'MontserratRegular',
   },
   container: {
-    flexDirection: 'row',
-    flexWrap: 'wrap',
-    justifyContent: 'flex-start',
-    alignItems: 'center'
+    // flexDirection: 'row',
+    // flexWrap: 'wrap',
+    // justifyContent: 'flex-start',
+    // alignItems: 'center'
   },
   chip: {
     marginRight: 10,
     marginTop: 10,
-    flex: 1
+    maxWidth: 150
   }
 })

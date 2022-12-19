@@ -27,7 +27,12 @@ export const passwordCategories: TPasswordCategory[] = [
         id: 3,
         label: 'Rede Social',
         color: '#e7b17f'
-    }
+    },
+    {
+      id: 4,
+      label: 'Teste',
+      color: '#32cd60'
+  }
 ]
 
 export const passwordList: TPassword[] = [
@@ -66,10 +71,10 @@ export const passwordList: TPassword[] = [
     },
     {
       title: "Github",
-      category:     {
-        id: 1,
-        label: 'Trabalho',
-        color: '#7ea0e5'
+      category: {
+        id: 4,
+        label: 'Teste',
+        color: '#32cd60'
     },
       category_name: 'Trabalho',
       login: 'anti-duhring',

@@ -47,13 +47,13 @@ class PasswordItem extends React.Component<Props> {
                     ...styles.container,
                     backgroundColor: 'white',
                     elevation: 20,
-                    borderColor: colors.password_category[this.props.item.category].dark
+                    borderColor: this.props.item.category.color
                 }}
             >
                 <View 
                     style={[
                         styles.border,
-                        {backgroundColor: colors.password_category[this.props.item.category].dark}
+                        {backgroundColor: this.props.item.category.color}
                     ]}
                 />
                 <View style={styles.body}>           

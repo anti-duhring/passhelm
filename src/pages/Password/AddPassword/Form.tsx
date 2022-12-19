@@ -7,6 +7,7 @@ import Safe from '../../../components/Svg/Safe';
 import AddCategory from '../components/AddCategory';
 import { CreateCategoryContext } from '../../../context/createCategory';
 import { TCreateCategoryContext } from '../../../context/createCategory/createCategory';
+import { PasswordDataContext } from '../../../context/passwordData';
 
 type Props = {}
 
@@ -17,6 +18,10 @@ const Form = (props: Props) => {
         loginError,
         passwordError,
     } = useContext(CreateCategoryContext) as TCreateCategoryContext;
+    const {
+        passwordData,
+        onChangeProperty
+    } = useContext(PasswordDataContext);
 
   return (
     <>
@@ -33,18 +38,21 @@ const Form = (props: Props) => {
                 validate={['required', (value) => validateLogin(value)]}
                 validationMessage={['Preencha o login', 'Preencha um login válido']}
                 error={loginError}
+                onChange={(e) => onChangeProperty('title', e)}
             />
             <TextFieldStyled
                 placeholder='Login da conta'
                 validate={['required', (value) => validateLogin(value)]}
                 validationMessage={['Preencha o login', 'Preencha um login válido']}
                 error={loginError}
+                onChange={(e) => onChangeProperty('login', e)}
             />
             <TextFieldStyled
                 placeholder='Senha'
                 validate={['required', (value) => validatePassword(value)]}
                 validationMessage={['Preencha a senha', 'Preencha uma senha válida']}
                 error={passwordError}
+                onChange={(e) => onChangeProperty('password', e)}
             />
             <AddCategory />
         </View>
@@ -54,6 +62,7 @@ const Form = (props: Props) => {
             size={Button.sizes.large} 
             backgroundColor={colors.highlight}
             style={styles.button}
+            onPress={() => console.log(passwordData)}
         />
     </KeyboardAvoidingView>
     </>

@@ -5,6 +5,7 @@ import { StatusBar } from 'expo-status-bar'
 import Form from './Form'
 import CreateCategoryProvider from '../../../context/createCategory'
 import { ParamListBase, RouteProp, useRoute } from '@react-navigation/native'
+import PasswordDataProvider from '../../../context/passwordData'
 
 type Props = {
 }
@@ -20,16 +21,18 @@ const EditPassword = (props: Props) => {
 
   return (
     <CreateCategoryProvider>
-      <View style={styles.container}>
-        <StatusBar 
-          style='light' 
-          backgroundColor={'black'}
-          translucent={false}
-        />
-        <View style={styles.body}>
-          <Form item={route.params.item} />
+      <PasswordDataProvider>
+        <View style={styles.container}>
+          <StatusBar 
+            style='light' 
+            backgroundColor={'black'}
+            translucent={false}
+          />
+          <View style={styles.body}>
+            <Form item={route.params.item} />
+          </View>
         </View>
-      </View>
+      </PasswordDataProvider>
     </CreateCategoryProvider>
   )
 }

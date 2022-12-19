@@ -34,7 +34,7 @@ const TextFieldStyled = (props: Props) => {
         validate={props.validate}
         validationMessage={props.validationMessage}
         showCharCounter={Boolean(props.maxLength)}
-        defaultValue={props.value}
+        value={props.value}
         onChangeText={props.onChange}
         validateOnChange
         fieldStyle={[

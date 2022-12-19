@@ -9,6 +9,7 @@ import { Entypo } from '@expo/vector-icons';
 import { CreateCategoryContext } from '../../../../context/createCategory';
 import { TCreateCategoryContext } from '../../../../context/createCategory/createCategory';
 import DialogAddCategory from './DialogAddCategory';
+import { PasswordDataContext } from '../../../../context/passwordData';
 
 type Props = {
 }
@@ -19,12 +20,15 @@ const AddCategory = (props: Props) => {
     showDialog,
     setShowDialog
   } = useContext(CreateCategoryContext) as TCreateCategoryContext;
+  const {
+    handleChosenCategory
+  } = useContext(PasswordDataContext);
 
   return (
     <View style={styles.container}>
       {
         categories?.map((category, index) => 
-          <View
+          <TouchableOpacity
             key={index}
             style={styles.chip}
           >
@@ -34,7 +38,7 @@ const AddCategory = (props: Props) => {
               }}
               {...category}
             />
-          </View>
+          </TouchableOpacity>
         )
       }
       <TouchableOpacity
@@ -68,6 +72,7 @@ const styles = StyleSheet.create({
   },
   chip: {
     marginRight: 10,
-    marginTop: 10
+    marginTop: 10,
+    flex: 1
   }
 })

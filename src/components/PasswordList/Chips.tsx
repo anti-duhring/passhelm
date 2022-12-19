@@ -11,10 +11,10 @@ const Chips = (props: Props) => {
   return (
     <View style={styles.container}>
         <Chip 
-            label={props.item.category_name} 
+            label={props.item.category.label} 
             onPress={() => console.log('pressed')}
             labelStyle={styles.label}
-            backgroundColor={colors.password_category[props.item.category].dark}
+            backgroundColor={props.item.category.color}
             containerStyle={styles.chip}
         />
     </View>

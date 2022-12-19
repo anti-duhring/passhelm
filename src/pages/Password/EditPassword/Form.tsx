@@ -1,5 +1,5 @@
 import { StyleSheet, KeyboardAvoidingView, View } from 'react-native'
-import React, { useContext } from 'react'
+import React, { useContext, useEffect } from 'react'
 import { colors } from '../../../constants/colors';
 import { Button } from 'react-native-ui-lib';
 import TextFieldStyled from '../components/TextFieldStyled';
@@ -7,9 +7,11 @@ import Safe from '../../../components/Svg/Safe';
 import AddCategory from '../components/AddCategory';
 import { CreateCategoryContext } from '../../../context/createCategory';
 import { TCreateCategoryContext } from '../../../context/createCategory/createCategory';
+import { TPassword } from '../../../constants/password';
+import { PasswordDataContext } from '../../../context/passwordData';
 
 type Props = {
-    item: any
+    item: TPassword
 }
 
 const Form = (props: Props) => {
@@ -18,7 +20,20 @@ const Form = (props: Props) => {
         validatePassword,
         loginError,
         passwordError,
+        setChosenCategory
     } = useContext(CreateCategoryContext) as TCreateCategoryContext;
+    const {
+        onChangeProperty,
+        passwordData,
+        setPasswordData
+    } = useContext(PasswordDataContext);
+
+    useEffect(() => {
+        if(!props.item) return
+
+        setChosenCategory(props.item.category)
+        setPasswordData(props.item)
+    },[])
 
   return (
     <>
@@ -35,21 +50,24 @@ const Form = (props: Props) => {
                 validate={['required', (value) => validateLogin(value)]}
                 validationMessage={['Preencha o login', 'Preencha um login válido']}
                 error={loginError}
-                value={props.item.title}
+                value={passwordData.title}
+                onChange={(e) => onChangeProperty('title', e)}
             />
             <TextFieldStyled
                 placeholder='Login da conta'
                 validate={['required', (value) => validateLogin(value)]}
                 validationMessage={['Preencha o login', 'Preencha um login válido']}
                 error={loginError}
-                value={props.item.login}
+                value={passwordData.login}
+                onChange={(e) => onChangeProperty('login', e)}
             />
             <TextFieldStyled
                 placeholder='Senha'
                 validate={['required', (value) => validatePassword(value)]}
                 validationMessage={['Preencha a senha', 'Preencha uma senha válida']}
                 error={passwordError}
-                value={props.item.password}
+                value={passwordData.password}
+                onChange={(e) => onChangeProperty('password', e)}
             />
             <AddCategory />
         </View>
@@ -59,6 +77,7 @@ const Form = (props: Props) => {
             size={Button.sizes.large} 
             backgroundColor={colors.highlight}
             style={styles.button}
+            onPress={() => console.log(passwordData)}
         />
     </KeyboardAvoidingView>
     </>

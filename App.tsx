@@ -7,9 +7,11 @@ import { NavigationContainer } from '@react-navigation/native';
 import { colors } from './src/constants/colors';
 import AuthRoutes from './src/routes/AuthRoutes';
 import * as NavigationBar from 'expo-navigation-bar';
+import useAuthenticate from './src/hooks/useAuthenticate';
 
 export default function App() {
   const [isLoading, setIsLoading] = useState<boolean>(true);
+  const { authentication, loading, error } = useAuthenticate()
 
   const loadFonts = async() => {
     await useFonts()
@@ -21,13 +23,21 @@ export default function App() {
     await NavigationBar.setButtonStyleAsync('dark');
   }
 
-  if(isLoading) {
+  if(isLoading || loading) {
     return (
       <AppLoading
         startAsync={loadApp}
         onFinish={() => setIsLoading(false)}
         onError={() => {}}
       />
+    )
+  }
+
+  if(!authentication.success) {
+    return (
+      <View>
+        <Text>Erro ao autenticar</Text>
+      </View>
     )
   }
 

@@ -14,6 +14,7 @@ import TextStyled from '../../../../components/TextStyled';
 import { CreateCategoryContext } from '../../../../context/createCategory';
 import { TCategory, TCreateCategoryContext } from '../../../../context/createCategory/createCategory';
 import TextFieldStyled from '../TextFieldStyled';
+import CarouselChips from './CarouselChips';
 const { ChipsInput } = Incubator;
 
 type Props = {
@@ -61,7 +62,7 @@ const DialogAddCategory = (props: Props) => {
           </TouchableOpacity>
         </View>
         <View style={styles.dialogBody}>
-          <View style={styles.chipsBody}>
+          {/* <View style={styles.chipsBody}>
             {
               categories?.map((category, index) => 
                 <View
@@ -78,7 +79,8 @@ const DialogAddCategory = (props: Props) => {
                 </View>
               )
             }
-          </View>
+          </View> */}
+          <CarouselChips dismiss />
           <TextFieldStyled
               placeholder='Nome da categoria'
               value={categoryLabel}

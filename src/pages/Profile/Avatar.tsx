@@ -1,20 +1,37 @@
-import { StyleSheet, Text, View } from 'react-native'
-import React, { useEffect, useState } from 'react';
+import { StyleSheet, View } from 'react-native'
+import React, { useState } from 'react';
 import { Avatar as AvatarE } from 'react-native-ui-lib';
 import { colors } from '../../constants/colors';
 import { MaterialIcons } from '@expo/vector-icons';
 import ImageView from "react-native-image-viewing";
-import * as NavigationBar from 'expo-navigation-bar';
+import * as ImagePicker from 'expo-image-picker';
+import * as LocalAuthentication from 'expo-local-authentication';
+import useAuthenticate from '../../hooks/useAuthenticate';
+
 
 type Props = {}
 
 const Avatar = (props: Props) => {
-    const [imageOpened, setImageOpened] = useState(false);
+    const [avatarData, setAvatarData] = useState<any>(require('../../../assets/avatar.jpg'))
+    const [imageOpened, setImageOpened] = useState<boolean>(false);
+
+    const choseAvatar = async() => {
+        // No permissions request is necessary for launching the image library
+        let result = await ImagePicker.launchImageLibraryAsync({
+            mediaTypes: ImagePicker.MediaTypeOptions.Images,
+        });
+    
+        console.log(result);
+    
+        if (!result.canceled) {
+            setAvatarData({uri: result.assets[0].uri});
+        }
+    }
 
   return (
     <View style={styles.container}>
         <AvatarE 
-            source={require('../../../assets/avatar.jpg')} 
+            source={avatarData} 
             label={'MV'}
             size={80} 
             labelColor={colors.primary}
@@ -22,8 +39,9 @@ const Avatar = (props: Props) => {
                 backgroundColor: colors.highlight,
                 borderColor: 'black',
                 borderWidth: 2,
-                size: 35,
-                customElement: <MaterialIcons name="photo-camera" size={20} color={colors.secondary} />
+                size: 45,
+                customElement: <MaterialIcons name="photo-camera" size={25} color={colors.secondary} />,
+                onPress: () => choseAvatar()
             }}
             imageStyle={{
                 borderColor: 'black',
@@ -32,7 +50,7 @@ const Avatar = (props: Props) => {
             onPress={() => setImageOpened(true)}
         />
         <ImageView
-            images={[require('../../../assets/avatar.jpg')]}
+            images={[avatarData]}
             imageIndex={0}
             swipeToCloseEnabled
             doubleTapToZoomEnabled

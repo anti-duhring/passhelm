@@ -55,9 +55,9 @@ const CreateCategoryProvider = ({ children }) => {
         let highestID = Math.max(...allPasswordCategories.map((cat) => cat.id));
         const newCategory: ChipProps = {
             ...newCategories.pop(),
-            backgroundColor: chosenColor,
-            dismissColor: 'white',
-            labelStyle: { color: 'white' },
+            backgroundColor: 'white',
+            dismissColor: chosenColor,
+            labelStyle: { color: chosenColor },
             containerStyle: { borderColor: chosenColor },
         }
         const newPasswordCategory: TCategory = {

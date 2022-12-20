@@ -8,6 +8,7 @@ import AddCategory from '../components/AddCategory';
 import { CreateCategoryContext } from '../../../context/createCategory';
 import { TCreateCategoryContext } from '../../../context/createCategory/createCategory';
 import { PasswordDataContext } from '../../../context/passwordData';
+import { MaterialIcons } from '@expo/vector-icons';
 
 type Props = {}
 
@@ -63,6 +64,8 @@ const Form = (props: Props) => {
             backgroundColor={colors.highlight}
             style={styles.button}
             onPress={() => console.log(passwordData)}
+            iconSource={() => <MaterialIcons name="file-download-done" size={24} color={colors.white} style={styles.updateIcon} />}
+            iconOnRight
         />
     </KeyboardAvoidingView>
     </>
@@ -108,5 +111,8 @@ const styles = StyleSheet.create({
         zIndex: 9999,
         justifyContent: 'center',
         alignItems: 'center'
-    }
+    },
+    updateIcon: {
+        marginLeft: 5
+    },
 })

@@ -13,10 +13,10 @@ export const returnAllChategories = (
     return categories.map(category => {
         return {
             label: category.label,
-            backgroundColor: chosenCategory?.id == category.id? 'white' : category.color,
-            dismissColor: chosenCategory?.id == category.id? category.color : 'white',
+            backgroundColor: chosenCategory?.id == category.id? category.color : 'white',
+            dismissColor: chosenCategory?.id == category.id? 'white' : category.color,
             labelStyle: {
-                color: chosenCategory?.id == category.id? category.color : 'white'
+                color: chosenCategory?.id == category.id?  'white' : category.color
             },
             containerStyle: {
                 borderColor: category.color 

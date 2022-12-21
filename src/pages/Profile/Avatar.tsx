@@ -32,9 +32,9 @@ const Avatar = (props: Props) => {
     <View style={styles.container}>
         <AvatarE 
             source={avatarData} 
-            label={'MV'}
+            // label={'MV'}
+            // labelColor={colors.primary}
             size={80} 
-            labelColor={colors.primary}
             badgeProps={{
                 backgroundColor: colors.highlight,
                 borderColor: 'black',

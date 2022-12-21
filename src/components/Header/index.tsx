@@ -11,19 +11,29 @@ type Props = {}
 const Header = (props: Props) => {
   return (
     // <View style={styles.container}>
-      <View style={styles.container}>
-        <Informations />
-        <View style={styles.titleContainer}>
-          <TextStyled 
-            style={styles.title}
-            color='light'
-            variant='medium'
-          >
-            Contas
-          </TextStyled>
-          <FilterChip />
+      <ImageBackground 
+        // source={require('../../../assets/header.png')}
+        resizeMode='contain'
+        style={{
+          flex: 1,
+          width: '100%',
+          backgroundColor: colors.primary
+        }}
+      >
+        <View style={styles.container}>
+          <Informations />
+          <View style={styles.titleContainer}>
+            <TextStyled 
+              style={styles.title}
+              color='light'
+              variant='medium'
+            >
+              Contas
+            </TextStyled>
+            <FilterChip />
+          </View>
         </View>
-      </View>
+      </ImageBackground>
     // </View>
   )
 }
@@ -32,7 +42,7 @@ export default Header;
 
 const styles = StyleSheet.create({
     container: {
-        backgroundColor: colors.primary,
+        // backgroundColor: colors.primary,
         width: '100%',
         paddingHorizontal: 25,
         paddingVertical: 20,

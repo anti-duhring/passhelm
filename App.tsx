@@ -1,39 +1,20 @@
 import { StatusBar } from 'expo-status-bar';
-import { useState } from 'react';
 import { StyleSheet, Text, View } from 'react-native';
-import useFonts from './src/hooks/useFonts';
-import AppLoading from 'expo-app-loading';
 import { NavigationContainer } from '@react-navigation/native';
-import { colors } from './src/constants/colors';
 import AuthRoutes from './src/routes/AuthRoutes';
-import * as NavigationBar from 'expo-navigation-bar';
 import useAuthenticate from './src/hooks/useAuthenticate';
+import Loading from './src/pages/Loading';
+import useLoadApp from './src/hooks/useLoadApp';
 
 export default function App() {
-  const [isLoading, setIsLoading] = useState<boolean>(true);
   const { authentication, loading, error } = useAuthenticate()
-
-  const loadFonts = async() => {
-    await useFonts()
-  }
-
-  const loadApp = async() => {
-    await loadFonts();
-    await NavigationBar.setBackgroundColorAsync('white');
-    await NavigationBar.setButtonStyleAsync('dark');
-  }
+  const { isLoading, loadError } = useLoadApp()
 
   if(isLoading || loading) {
-    return (
-      <AppLoading
-        startAsync={loadApp}
-        onFinish={() => setIsLoading(false)}
-        onError={() => {}}
-      />
-    )
+    return <Loading />
   }
 
-  if(!authentication.success) {
+  if(!authentication.success || loadError) {
     return (
       <View>
         <Text>Erro ao autenticar</Text>

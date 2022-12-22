@@ -5,6 +5,7 @@ import AuthRoutes from './src/routes/AuthRoutes';
 import useAuthenticate from './src/hooks/useAuthenticate';
 import Loading from './src/pages/Loading';
 import useLoadApp from './src/hooks/useLoadApp';
+import NoAuthRoutes from './src/routes/NoAuthRoutes';
 
 export default function App() {
   const { authentication, loading, error } = useAuthenticate()
@@ -29,7 +30,11 @@ export default function App() {
         backgroundColor={'black'}
         translucent={false}
       />
-      <AuthRoutes />
+      {
+        false ? 
+        <AuthRoutes /> :
+        <NoAuthRoutes />
+      }
     </NavigationContainer>
   );
 }

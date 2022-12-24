@@ -1,19 +1,22 @@
-import { Image, StyleSheet, Text, View } from 'react-native'
-import React from 'react'
+import { StyleSheet, View } from 'react-native'
+import React, { useState } from 'react'
 import { StatusBar } from 'expo-status-bar'
-import { colors } from '../../constants/colors'
-import { Button } from 'react-native-ui-lib'
+import PageControl from './components/PageControl'
+import Buttons from './components/Buttons'
+import HeroImage from './components/HeroImage'
 
 type Props = {}
 
 const images = [
+    require('../../../assets/landing4.png'),
     require('../../../assets/landing1.png'),
-    require('../../../assets/landing2.png'),
     require('../../../assets/landing3.png'),
-    require('../../../assets/landing4.png')
 ]
 
 const LandingPage = (props: Props) => {
+    const [currentPage, setCurrentPage] = useState<number>(0)
+    const numOfPages = 3;
+
   return (
     <View style={styles.container}>
         <StatusBar 
@@ -21,23 +24,19 @@ const LandingPage = (props: Props) => {
             backgroundColor={'white'}
             translucent={false}
         />
+        <PageControl
+            numOfPages={numOfPages}
+            currentPage={currentPage}
+            setCurrentPage={setCurrentPage}
+        />
         <View style={styles.content}>
-            <Image
-                source={images[3]}
-                style={styles.heroImage}
-                resizeMode='contain'
+            <HeroImage
+                image={images[currentPage]}
+                currentPage={currentPage}
             />
-            <Button 
-                label={'Próximo'} 
-                size='large' 
-                backgroundColor={colors.highlight}
-                style={styles.buttonNext}
-            />
-            <Button 
-                label={'Pular'} 
-                size='large' 
-                backgroundColor={colors.secondary}
-                style={styles.buttonNext}
+            <Buttons
+                setCurrentPage={setCurrentPage}
+                numOfPages={numOfPages}
             />
         </View>
     </View>
@@ -49,26 +48,11 @@ export default LandingPage
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        backgroundColor: 'white'
-    },
-    content: {
-        justifyContent: 'space-around',
-        alignItems: 'center',
-        width: '100%',
-        height: '100%',
-        flex: 1,
+        backgroundColor: 'white',
         padding: '5%',
     },
-    heroImage: {
-        width: '100%',
-        height: 300
+    content: {
+        justifyContent: 'space-between',
+        flex: 1
     },
-    buttonNext: {
-        width: '100%',
-        // borderRadius: 10
-    },
-    buttonSkip: {
-        width: '100%',
-        color: 'black'
-    }
 })

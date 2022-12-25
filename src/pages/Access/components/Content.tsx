@@ -1,15 +1,17 @@
 import { StyleSheet, Text, View } from 'react-native'
 import React from 'react'
 import Title from './Title'
-import Form from './Form'
 
-type Props = {}
+type Props = {
+  children: React.ReactNode;
+  title: string;
+}
 
 const Content = (props: Props) => {
   return (
     <View style={styles.container}>
-      <Title />
-      <Form />
+      <Title text={props.title} />
+      {props.children}
     </View>
   )
 }

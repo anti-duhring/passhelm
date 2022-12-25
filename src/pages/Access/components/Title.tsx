@@ -2,7 +2,9 @@ import { StyleSheet, Text, View } from 'react-native'
 import React from 'react'
 import TextStyled from '../../../components/TextStyled'
 
-type Props = {}
+type Props = {
+  text: string;
+}
 
 const Title = (props: Props) => {
   return (
@@ -11,7 +13,7 @@ const Title = (props: Props) => {
         variant='bold'
         style={styles.title}
       >
-        Entrar
+        {props.text}
     </TextStyled>
     </View>
   )

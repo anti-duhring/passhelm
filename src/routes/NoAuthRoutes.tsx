@@ -1,7 +1,8 @@
 import React from 'react';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import LandingPage from '../pages/Landing';
-import Login from '../pages/Login';
+import Login from '../pages/Access/Login';
+import Register from '../pages/Access/Register';
 
 const Stack = createNativeStackNavigator();
 
@@ -21,6 +22,10 @@ const NoAuthRoutes = () => {
         <Stack.Screen
           name="Login"
           component={Login}
+        />
+        <Stack.Screen
+          name="Register"
+          component={Register}
         />
       </Stack.Navigator>
   );

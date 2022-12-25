@@ -1,26 +1,27 @@
-import { StyleSheet, Text, View } from 'react-native'
-import React from 'react'
+import { StyleSheet, View } from 'react-native'
+import React, { useContext } from 'react'
 import TextStyled from '../../../components/TextStyled'
-import { heroTexts } from '../../../constants/heroText';
+import { LandingPageContext } from '../../../context/LandingPage';
 
 type Props = {
-    currentPage: number;
 }
 
 const HeroText = (props: Props) => {
+    const { currentText } = useContext(LandingPageContext);
+
   return (
     <View style={styles.container}>
         <TextStyled 
             style={styles.title}
             variant='bold'
         >
-           { heroTexts.titles[props.currentPage] }
+           { currentText.title }
         </TextStyled>
         <TextStyled 
             style={styles.legend}
             variant='light'
         >
-            { heroTexts.legends[props.currentPage] }
+            { currentText.legend }
         </TextStyled>
     </View>
   )

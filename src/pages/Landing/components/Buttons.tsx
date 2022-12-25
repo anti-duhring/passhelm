@@ -1,36 +1,39 @@
-import { StyleSheet, Text, View } from 'react-native'
-import React from 'react'
+import { StyleSheet, View } from 'react-native'
+import React, { useContext } from 'react'
 import { Button } from 'react-native-ui-lib'
 import { colors } from '../../../constants/colors'
+import { LandingPageContext } from '../../../context/LandingPage'
 
 type Props = {
-    setCurrentPage: React.Dispatch<React.SetStateAction<number>>;
-    numOfPages: number;
+
 }
 
 const Buttons = (props: Props) => {
+    const { 
+        nextPage, 
+        jumpPages,
+        isLastPage 
+    } = useContext(LandingPageContext)
+
   return (
     <View style={styles.container}>
         <Button 
-            label={'Próximo'} 
+            label={isLastPage ? 'Entrar' : 'Próximo'} 
             size='large' 
             backgroundColor={colors.highlight}
             style={styles.buttonNext}
-            onPress={() => props.setCurrentPage(currentPage => {
-                console.log(currentPage, props.numOfPages)
-                if(currentPage >= props.numOfPages - 1) return props.numOfPages - 1
-            
-                return currentPage + 1
-            })}
+            onPress={nextPage}
         />
-        <Button 
-            label={'Pular'} 
-            size='large' 
-            backgroundColor={colors.secondary}
-            style={styles.buttonSkip}
-            color={colors.primary}
-            onPress={() => props.setCurrentPage(0)}
-        />
+        {!isLastPage &&
+            <Button 
+                label={'Pular'} 
+                size='large' 
+                backgroundColor={colors.secondary}
+                style={styles.buttonSkip}
+                color={colors.primary}
+                onPress={jumpPages}
+            />
+        }
     </View>
   )
 }

@@ -1,24 +1,22 @@
 import { StyleSheet, Image, View } from 'react-native'
-import React from 'react'
+import React, { useContext } from 'react'
 import TextStyled from '../../../components/TextStyled';
 import HeroText from './HeroText';
+import { LandingPageContext } from '../../../context/LandingPage';
 
 type Props = {
-    image: HTMLImageElement;
-    currentPage: number;
 }
 
 const HeroImage = (props: Props) => {
+    const { currentImage } = useContext(LandingPageContext)
   return (
     <View style={styles.container}>
         <Image
-            source={props.image}
+            source={currentImage}
             style={styles.heroImage}
             resizeMode='contain'
         />
-        <HeroText
-            currentPage={props.currentPage}
-        />
+        <HeroText />
     </View>
   )
 }

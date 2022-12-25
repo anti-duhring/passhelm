@@ -19,7 +19,7 @@ const PageContainer = (props: Props) => {
         <View style={styles.body}>
             <KeyboardAvoidingView 
                 style={[styles.content, props.style]}
-                behavior='height'
+                behavior='padding'
             >
                 {props.children}
             </KeyboardAvoidingView>

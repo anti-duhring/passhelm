@@ -1,7 +1,7 @@
 import { StyleSheet, Text, View } from 'react-native'
-import React, { useState } from 'react'
-import TextStyled from '../../components/TextStyled'
+import React, { useContext } from 'react'
 import TextFieldStyled from '../../components/TextFieldStyled'
+import { AuthContext } from '../../context/auth'
 
 type Props = {}
 
@@ -12,57 +12,23 @@ type UserData = {
 }
 
 const Informations = (props: Props) => {
-  const [userData, setUserData] = useState<UserData | null>({
-    name: 'Mateus Vinícius',
-    login: 'mateusvinicius',
-    email: 'mateusvnlima@gmail.com'
-  })
-
-  const setName = (value: string) => {
-    setUserData(oldData => {
-      return {
-        ...oldData,
-        name: value
-      }
-    })
-  }
-
-  const setLogin = (value: string) => {
-    setUserData(oldData => {
-      return {
-        ...oldData,
-        login: value
-      }
-    })
-  }
-
-  const setEmail = (value: string) => {
-    setUserData(oldData => {
-      return {
-        ...oldData,
-        email: value
-      }
-    })
-  }
+  const { userData } = useContext(AuthContext)
 
   return (
     <View style={styles.container}>
       <TextFieldStyled
         placeholder='Nome'
         value={userData.name}
-        onChange={setName}
         style={styles.textField}
       />
       <TextFieldStyled
         placeholder='Login'
-        value={userData.login}
-        onChange={setLogin}
+        value={userData.username}
         style={styles.textField}
       />
       <TextFieldStyled
         placeholder='Email'
         value={userData.email}
-        onChange={setEmail}
         style={styles.textField}
       />
     </View>

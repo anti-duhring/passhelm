@@ -6,6 +6,8 @@ import useAuthenticate from './src/hooks/useAuthenticate';
 import Loading from './src/pages/Loading';
 import useLoadApp from './src/hooks/useLoadApp';
 import NoAuthRoutes from './src/routes/NoAuthRoutes';
+import AuthContextProvider from './src/context/auth';
+import Routes from './src/routes';
 
 export default function App() {
   const { authentication, loading, error } = useAuthenticate()
@@ -24,18 +26,16 @@ export default function App() {
   }
 
   return (
-    <NavigationContainer>
-      <StatusBar 
-        style="light" 
-        backgroundColor={'black'}
-        translucent={false}
-      />
-      {
-        false ? 
-        <AuthRoutes /> :
-        <NoAuthRoutes />
-      }
-    </NavigationContainer>
+    <AuthContextProvider>
+      <NavigationContainer>
+        <StatusBar 
+          style="light" 
+          backgroundColor={'black'}
+          translucent={false}
+        />
+        <Routes />
+      </NavigationContainer>
+    </AuthContextProvider>
   );
 }
 

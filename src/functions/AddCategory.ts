@@ -1,5 +1,4 @@
 import { ChipProps } from "react-native-ui-lib"
-import { TCategory } from "../context/createCategory/createCategory"
 
 export const returnAllChategories = (
         categories: TCategory[],
@@ -17,6 +16,31 @@ export const returnAllChategories = (
             dismissColor: chosenCategory?.id == category.id? 'white' : category.color,
             labelStyle: {
                 color: chosenCategory?.id == category.id?  'white' : category.color
+            },
+            containerStyle: {
+                borderColor: category.color 
+            },
+            onPress: () => handleClickChip(category)
+        }
+    })
+}
+
+export const convertCategoryModelToChip = (categories: TCategory[]) => {
+
+    const handleClickChip = (category: TCategory) => {
+        console.log(category);
+    }
+
+    return categories.map(category => {
+        return {
+            id: category.id,
+            userId: category.userId,
+            color: category.color,
+            label: category.label,
+            backgroundColor: 'white',
+            dismissColor: category.color,
+            labelStyle: {
+                color: category.color
             },
             containerStyle: {
                 borderColor: category.color 

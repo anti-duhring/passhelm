@@ -38,6 +38,7 @@ const styles = StyleSheet.create({
     marginRight: 5
   },
   updateButton: {
-    marginTop: 5
+    marginTop: 5,
+    marginBottom: 15
   }
 })

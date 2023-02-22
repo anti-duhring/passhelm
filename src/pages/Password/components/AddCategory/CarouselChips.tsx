@@ -1,10 +1,10 @@
-import { StyleSheet, View } from 'react-native'
-import React, { useRef, useContext } from 'react'
-import { GestureHandlerRootView } from 'react-native-gesture-handler'
-import { Chip } from 'react-native-ui-lib';
-import { TCategory } from '../../../../context/createCategory/createCategory';
-import { CreateCategoryContext } from '../../../../context/createCategory';
+import React, { useContext, useRef } from 'react';
+import { StyleSheet, View } from 'react-native';
+import { GestureHandlerRootView } from 'react-native-gesture-handler';
 import Carousel from 'react-native-reanimated-carousel';
+import { Chip } from 'react-native-ui-lib';
+
+import ManageCategoryContext from '../../../../context/ManageCategory';
 
 type Props = {
    dismiss?: boolean;
@@ -12,7 +12,7 @@ type Props = {
 }
 
 type ChipItemProps = {
-  item: TCategory,
+  item: any,
   index: number,
   length: number,
   dismiss?: () => void | null;
@@ -38,11 +38,7 @@ const ChipItem = (props: ChipItemProps) => {
 }
 
 const CarouselChips = (props: Props) => {
-    const { 
-        categories,
-        setShowDialog,
-        handleDeleteChips
-      } = useContext(CreateCategoryContext);
+    const { categories } = useContext(ManageCategoryContext);
 
     const ref = useRef<any>(null)
     const addCategoryChip = {
@@ -54,10 +50,10 @@ const CarouselChips = (props: Props) => {
         width: 40
       },
       iconStyle: {width: 27, height: 27},
-      onPress: () => setShowDialog(value => !value)
+      onPress: () => console.log('Pressed')
     }
 
-    if(!categories) return
+    if(!categories.length) return
 
   return (
     <GestureHandlerRootView>
@@ -80,7 +76,7 @@ const CarouselChips = (props: Props) => {
               length={categories.length} 
               index={index} 
               item={item} 
-              dismiss={props.dismiss? () => handleDeleteChips(item) : null}
+              dismiss={props.dismiss? () => console.log('deleted') : null}
             /> 
           }
       />

@@ -3,18 +3,20 @@ import {
     StyleSheet, 
     TouchableOpacity
 } from 'react-native';
-import React from 'react';
+import React, { useContext } from 'react';
 import { colors } from '../../constants/colors';
 import TextStyled from '../TextStyled';
 import { Avatar, Colors } from 'react-native-ui-lib';
 import { Ionicons } from '@expo/vector-icons';
 import { useNavigation } from '@react-navigation/native';
+import { AuthContext } from '../../context/auth';
 
 type Props = {
 }
 
 const Informations = (props: Props) => {
     const navigation = useNavigation();
+    const { userData } = useContext(AuthContext);
 
   return (
     <View style={styles.container}>
@@ -35,7 +37,7 @@ const Informations = (props: Props) => {
                 style={styles.greetings}
                 variant='light'
             >
-                Olá, Mateus
+                Olá, {userData.name.split(' ')[0]}
             </TextStyled>
             </View>
         </View>

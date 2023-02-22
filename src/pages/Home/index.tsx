@@ -46,6 +46,6 @@ const styles = StyleSheet.create({
   body: {
     paddingTop: 10,
     backgroundColor: 'white',
-    minHeight: 100,
+    minHeight: 600,
   }
 });

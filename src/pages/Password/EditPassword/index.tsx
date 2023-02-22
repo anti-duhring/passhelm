@@ -1,11 +1,12 @@
-import { StyleSheet, View } from 'react-native'
-import React from 'react'
-import { colors } from '../../../constants/colors'
-import { StatusBar } from 'expo-status-bar'
-import Form from './Form'
-import CreateCategoryProvider from '../../../context/createCategory'
-import { ParamListBase, RouteProp, useRoute } from '@react-navigation/native'
-import PasswordDataProvider from '../../../context/passwordData'
+import { ParamListBase, RouteProp, useRoute } from '@react-navigation/native';
+import { StatusBar } from 'expo-status-bar';
+import React from 'react';
+import { StyleSheet, View } from 'react-native';
+import { colors } from '../../../constants/colors';
+import { ManageCategoryProvider } from '../../../context/ManageCategory';
+import PasswordDataProvider from '../../../context/passwordData';
+import Form from './Form';
+import { ManagePasswordProvider } from '../../../context/ManagePassword';
 
 type Props = {
 }
@@ -20,8 +21,8 @@ const EditPassword = (props: Props) => {
   const route: TRoute = useRoute();
 
   return (
-    <CreateCategoryProvider>
-      <PasswordDataProvider>
+    <ManageCategoryProvider password={route.params.item}>
+      <ManagePasswordProvider password={route.params.item}>
         <View style={styles.container}>
           <StatusBar 
             style='light' 
@@ -32,8 +33,8 @@ const EditPassword = (props: Props) => {
             <Form item={route.params.item} />
           </View>
         </View>
-      </PasswordDataProvider>
-    </CreateCategoryProvider>
+      </ManagePasswordProvider>
+    </ManageCategoryProvider>
   )
 }
 

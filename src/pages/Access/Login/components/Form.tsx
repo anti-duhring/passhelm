@@ -5,6 +5,7 @@ import { Button } from 'react-native-ui-lib'
 import { colors } from '../../../../constants/colors'
 import { useNavigation } from '@react-navigation/native'
 import { links } from '../../../../constants/links'
+import useLogin from '../../../../hooks/useLogin'
 
 type Props = {}
 
@@ -15,6 +16,7 @@ type TLoginData = {
 
 const Form = (props: Props) => {
     const navigation = useNavigation();
+    const { login, error, isLoading } = useLogin();
     const [loginData, setLoginData] = useState<TLoginData>({
         login: '',
         password: ''
@@ -29,8 +31,8 @@ const Form = (props: Props) => {
         })
     }
 
-    const handleSubmit = () => {
-        console.log(loginData)
+    const handleSubmit = async() => {
+         await login({...loginData});
     }
 
   return (
@@ -54,6 +56,7 @@ const Form = (props: Props) => {
                 backgroundColor={colors.highlight}
                 style={styles.button}
                 onPress={handleSubmit}
+                disabled={isLoading}
             />
             <Button 
                 label={'Criar conta'} 
@@ -62,6 +65,7 @@ const Form = (props: Props) => {
                 color={colors.black}
                 style={styles.button}
                 onPress={() => navigation.navigate(links.register)}
+                disabled={isLoading}
             />
         </View>
     </View>

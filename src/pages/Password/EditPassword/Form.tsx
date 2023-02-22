@@ -1,40 +1,19 @@
-import { StyleSheet, KeyboardAvoidingView, View } from 'react-native'
-import React, { useContext, useEffect } from 'react'
-import { colors } from '../../../constants/colors';
-import { Button } from 'react-native-ui-lib';
-import TextFieldStyled from '../components/TextFieldStyled';
-import Safe from '../../../components/Svg/Safe';
-import AddCategory from '../components/AddCategory';
-import { CreateCategoryContext } from '../../../context/createCategory';
-import { TCreateCategoryContext } from '../../../context/createCategory/createCategory';
-import { TPassword } from '../../../constants/password';
-import { PasswordDataContext } from '../../../context/passwordData';
 import { MaterialIcons } from '@expo/vector-icons';
+import React, { useContext, useEffect } from 'react';
+import { KeyboardAvoidingView, StyleSheet, View } from 'react-native';
+import { Button } from 'react-native-ui-lib';
+import Safe from '../../../components/Svg/Safe';
+import { colors } from '../../../constants/colors';
+import ManagePasswordContext from '../../../context/ManagePassword';
+import AddCategory from '../components/AddCategory';
+import TextFieldStyled from '../components/TextFieldStyled';
 
 type Props = {
-    item: TPassword
+    item: TPasswordWithCategory
 }
 
 const Form = (props: Props) => {
-    const {
-        validateLogin,
-        validatePassword,
-        loginError,
-        passwordError,
-        setChosenCategory
-    } = useContext(CreateCategoryContext) as TCreateCategoryContext;
-    const {
-        onChangeProperty,
-        passwordData,
-        setPasswordData
-    } = useContext(PasswordDataContext);
-
-    useEffect(() => {
-        if(!props.item) return
-
-        setChosenCategory(props.item.category)
-        setPasswordData(props.item)
-    },[])
+    const { password, editPasswordProperty } = useContext(ManagePasswordContext);
 
   return (
     <>
@@ -48,27 +27,27 @@ const Form = (props: Props) => {
         <View style={styles.fieldContainer}>
             <TextFieldStyled
                 placeholder='Título'
-                validate={['required', (value) => validateLogin(value)]}
+                // validate={['required', (value) => validateLogin(value)]}
                 validationMessage={['Preencha o login', 'Preencha um login válido']}
-                error={loginError}
-                value={passwordData.title}
-                onChange={(e) => onChangeProperty('title', e)}
+                error={false}
+                value={password.title}
+                onChange={(e) => editPasswordProperty('title', e)}
             />
             <TextFieldStyled
                 placeholder='Login da conta'
-                validate={['required', (value) => validateLogin(value)]}
+                // validate={['required', (value) => validateLogin(value)]}
                 validationMessage={['Preencha o login', 'Preencha um login válido']}
-                error={loginError}
-                value={passwordData.login}
-                onChange={(e) => onChangeProperty('login', e)}
+                error={false}
+                value={password.login}
+                onChange={(e) => editPasswordProperty('login', e)}
             />
             <TextFieldStyled
                 placeholder='Senha'
-                validate={['required', (value) => validatePassword(value)]}
+                // validate={['required', (value) => validatePassword(value)]}
                 validationMessage={['Preencha a senha', 'Preencha uma senha válida']}
-                error={passwordError}
-                value={passwordData.password}
-                onChange={(e) => onChangeProperty('password', e)}
+                error={false}
+                value={password.password}
+                onChange={(e) => editPasswordProperty('password', e)}
             />
             <AddCategory />
         </View>
@@ -78,7 +57,7 @@ const Form = (props: Props) => {
             size={Button.sizes.large} 
             backgroundColor={colors.highlight}
             style={styles.button}
-            onPress={() => console.log(passwordData)}
+            onPress={() => console.log(props.item)}
             iconSource={() => <MaterialIcons name="file-download-done" size={24} color={colors.white} style={styles.updateIcon} />}
             iconOnRight
         />

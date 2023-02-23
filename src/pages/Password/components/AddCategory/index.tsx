@@ -2,24 +2,28 @@ import React, { useContext } from 'react';
 import { StyleSheet, View } from 'react-native';
 
 import CarouselChips from './CarouselChips';
+import ManageCategoryContext from '../../../../context/ManageCategory';
+import { Dialog, PanningProvider } from 'react-native-ui-lib';
+import DialogAddCategory from './DialogAddCategory';
 
 type Props = {
 }
 
 const AddCategory = (props: Props) => {
+  const { showCreateCategoryDialog, setShowCreateCategoryDialog } = useContext(ManageCategoryContext);
 
   return (
     <View style={styles.container}>
       <View>
         <CarouselChips addIcon />
       </View>
-      {/* <Dialog 
-        visible={showDialog} 
-        onDismiss={() => setShowDialog(value => !value)} 
+      <Dialog 
+        visible={showCreateCategoryDialog} 
+        onDismiss={() => setShowCreateCategoryDialog(value => !value)} 
         panDirection={PanningProvider.Directions.DOWN}
       >
         <DialogAddCategory />
-      </Dialog> */}
+      </Dialog>
     </View>
   )
 }

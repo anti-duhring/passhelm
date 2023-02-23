@@ -1,10 +1,12 @@
-import { createContext, useState } from "react";
+import { createContext, useContext, useState } from "react";
 import { Password } from "../../models/password";
+import ManageCategoryContext from "../ManageCategory";
 
-const ManagePasswordContext = createContext<any>(null);
+const ManagePasswordContext = createContext<TManagePasswordContext>(null);
 
 const ManagePasswordProvider = ({ children, password }) => {
     const currentPassword = new Password(password);
+    const { chosedCategoryId } = useContext(ManageCategoryContext);
     const [passwordData, setPasswordData] = useState<TPassword>({
         id: currentPassword.id,
         categoryId: currentPassword.categoryId,
@@ -12,6 +14,11 @@ const ManagePasswordProvider = ({ children, password }) => {
         title: currentPassword.title,
         login: currentPassword.login,
         password: currentPassword.password
+    })
+    const [labelErrors, setLabelErrors] = useState({
+        title: false,
+        login: false,
+        password: false
     })
 
     const editPasswordProperty = (property: string, value: string) => {
@@ -23,11 +30,20 @@ const ManagePasswordProvider = ({ children, password }) => {
         })
     }
 
+    const submitPassword = () => {
+        const editedPassword = {...passwordData}
+        editedPassword.categoryId = chosedCategoryId;
+        
+        console.log(editedPassword);
+    }
+
     return (
         <ManagePasswordContext.Provider 
             value={{
                 password: passwordData,
-                editPasswordProperty
+                editPasswordProperty,
+                labelErrors,
+                submitPassword
             }}
         >
             {children}

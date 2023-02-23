@@ -1,6 +1,7 @@
 import { createContext, useContext, useEffect, useState } from "react";
 import { AuthContext } from "../auth";
 import { convertCategoryModelToChip } from "../../functions/AddCategory";
+import { Colors } from "react-native-ui-lib";
 
 const ManageCategoryContext = createContext<any>(null);
 
@@ -9,6 +10,24 @@ const ManageCategoryProvider = ({ children, password }) => {
     const { allCategories } = useContext(AuthContext);
     const [categoriesChipFormat, setCategoriesChipFormat] = useState<TCategoryChip[]>([]);
     const [chosedCategoryId, setChoosedCategoryId] = useState<number>(password.category.id);
+    const chosedCategory = allCategories.find(c => c.id == chosedCategoryId);
+
+    const [showCreateCategoryDialog, setShowCreateCategoryDialog] = useState<boolean>(false);
+    
+    const [chosedCategoryColor, setChosedCategoryColor] = useState<string>(Colors.highlight);
+
+    const categoriesColors = [
+        Colors.highlight, 
+        Colors.green30, 
+        Colors.yellow30, 
+        Colors.red30,
+        Colors.purple30,
+        Colors.cyan30,
+        Colors.dark,
+        Colors.violet30,
+        Colors.grey30,
+        Colors.orange30
+    ]
 
     const chooseCategory = (id: number) => {
         setChoosedCategoryId(id);
@@ -43,7 +62,13 @@ const ManageCategoryProvider = ({ children, password }) => {
         <ManageCategoryContext.Provider value={{
             categories: categoriesChipFormat,
             setCategories: setCategoriesChipFormat,
-            chosedCategoryId
+            chosedCategoryId,
+            chosedCategory,
+            showCreateCategoryDialog,
+            setShowCreateCategoryDialog,
+            categoriesColors,
+            chosedCategoryColor,
+            setChosedCategoryColor
         }}>
             {children}
         </ManageCategoryContext.Provider>

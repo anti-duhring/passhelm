@@ -1,20 +1,14 @@
-import { StyleSheet, View, TouchableOpacity } from 'react-native'
-import React, { useContext, useState } from 'react'
-import { 
-  Incubator, 
-  Colors, 
-  ColorPalette, 
-  Button,
-  ChipProps,
-  Chip
-} from 'react-native-ui-lib';
-import { colors } from '../../../../constants/colors';
 import { AntDesign } from '@expo/vector-icons';
+import React, { useContext, useState } from 'react';
+import { StyleSheet, TouchableOpacity, View } from 'react-native';
+import { Button, ColorPalette, Incubator } from 'react-native-ui-lib';
+
 import TextStyled from '../../../../components/TextStyled';
-import { CreateCategoryContext } from '../../../../context/createCategory';
-import { TCategory, TCreateCategoryContext } from '../../../../context/createCategory/createCategory';
+import { colors } from '../../../../constants/colors';
+import ManageCategoryContext from '../../../../context/ManageCategory';
 import TextFieldStyled from '../TextFieldStyled';
 import CarouselChips from './CarouselChips';
+
 const { ChipsInput } = Incubator;
 
 type Props = {
@@ -22,26 +16,16 @@ type Props = {
 }
 
 const DialogAddCategory = (props: Props) => {
+  const { 
+    categoriesColors,
+    chosedCategoryColor,
+    setChosedCategoryColor,
+    setShowCreateCategoryDialog 
+  } = useContext(ManageCategoryContext);
   const [categoryLabel, setCategoryLabel] = useState<string>('')
-    const { 
-        categories,
-        setCategories,
-        setShowDialog,
-        chosenColor,
-        setChosenColor,
-        handleChangeChips,
-        handleDeleteChips,
-        categoriesColors
-    } = useContext(CreateCategoryContext) as TCreateCategoryContext;
 
     const onSubmit = () => {
-      let newCategories: ChipProps[] = [
-        ...categories,
-        {
-          label: categoryLabel,
-        }
-      ]
-      handleChangeChips(newCategories)
+      console.log('submited')
 
     }
 
@@ -55,7 +39,7 @@ const DialogAddCategory = (props: Props) => {
             Criar categoria
           </TextStyled>
           <TouchableOpacity
-            onPress={() => setShowDialog(value => !value)}
+            onPress={() => setShowCreateCategoryDialog(value => !value)}
             style={styles.closeButton}
           >
             <AntDesign name="close" size={24} color="black" />
@@ -89,8 +73,8 @@ const DialogAddCategory = (props: Props) => {
           />
           <ColorPalette
             colors={categoriesColors}
-            value={chosenColor}
-            onValueChange={(value: string) => setChosenColor(value)}
+            value={chosedCategoryColor}
+            onValueChange={(value: string) => setChosedCategoryColor(value)}
           />
         </View>
         <View style={styles.dialogButton}>

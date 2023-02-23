@@ -5,7 +5,7 @@ import { User } from "../models/user";
 export class apiService {
 
     constructor(config: { token?: string }) {
-        axios.defaults.baseURL = 'http://10.0.0.103:8080/api/v1';
+        axios.defaults.baseURL = 'http://10.0.0.104:8080/api/v1';
         axios.defaults.headers.common.Authorization = config.token ? `Bearer ${config.token}` : null
     }
 

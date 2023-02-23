@@ -38,7 +38,7 @@ const ChipItem = (props: ChipItemProps) => {
 }
 
 const CarouselChips = (props: Props) => {
-    const { categories } = useContext(ManageCategoryContext);
+    const { categories, setShowCreateCategoryDialog } = useContext(ManageCategoryContext);
 
     const ref = useRef<any>(null)
     const addCategoryChip = {
@@ -50,7 +50,7 @@ const CarouselChips = (props: Props) => {
         width: 40
       },
       iconStyle: {width: 27, height: 27},
-      onPress: () => console.log('Pressed')
+      onPress: () => setShowCreateCategoryDialog(value => !value)
     }
 
     if(!categories.length) return

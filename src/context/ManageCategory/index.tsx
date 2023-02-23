@@ -2,22 +2,25 @@ import { createContext, useContext, useEffect, useState } from "react";
 import { AuthContext } from "../auth";
 import { convertCategoryModelToChip } from "../../functions/AddCategory";
 import { Colors } from "react-native-ui-lib";
+import useCreateCategory from "../../hooks/useCreateCategory";
+import { colors } from "../../constants/colors";
 
 const ManageCategoryContext = createContext<any>(null);
 
 
 const ManageCategoryProvider = ({ children, password }) => {
     const { allCategories } = useContext(AuthContext);
+    const createCategory = useCreateCategory();
     const [categoriesChipFormat, setCategoriesChipFormat] = useState<TCategoryChip[]>([]);
     const [chosedCategoryId, setChoosedCategoryId] = useState<number>(password.category.id);
     const chosedCategory = allCategories.find(c => c.id == chosedCategoryId);
 
     const [showCreateCategoryDialog, setShowCreateCategoryDialog] = useState<boolean>(false);
     
-    const [chosedCategoryColor, setChosedCategoryColor] = useState<string>(Colors.highlight);
+    const [chosedCategoryColor, setChosedCategoryColor] = useState<string>(colors.highlight);
 
     const categoriesColors = [
-        Colors.highlight, 
+        colors.highlight, 
         Colors.green30, 
         Colors.yellow30, 
         Colors.red30,
@@ -42,6 +45,37 @@ const ManageCategoryProvider = ({ children, password }) => {
                 }
             })
         )
+    }
+
+    const createNewCategory = async(category: TCategory) => {
+        const newCategory = await createCategory.create(category);
+        if(!newCategory) {
+            return
+        }
+        console.log(newCategory);
+
+        const newCategoryAsChip = {
+            ...newCategory,
+            backgroundColor: newCategory.color,
+            labelStyle: { color: 'white' },
+            dismissColor: 'white',
+            onPress: () => chooseCategory(newCategory.id)
+        }
+
+        setChoosedCategoryId(newCategory.id);
+        setCategoriesChipFormat(oldCategories => {
+            const oldCategoriesButRemoveThePreviouslyChosedOne = oldCategories.map(item => {
+                return {
+                    ...item,
+                    backgroundColor: 'white',
+                    labelStyle: { color: item.color },
+                    dismissColor: item.color,
+                    onPress: () => chooseCategory(item.id)
+                }
+            })
+
+            return [...oldCategoriesButRemoveThePreviouslyChosedOne, newCategoryAsChip]
+        })
     }
     
     useEffect(() => {
@@ -68,7 +102,8 @@ const ManageCategoryProvider = ({ children, password }) => {
             setShowCreateCategoryDialog,
             categoriesColors,
             chosedCategoryColor,
-            setChosedCategoryColor
+            setChosedCategoryColor,
+            createNewCategory
         }}>
             {children}
         </ManageCategoryContext.Provider>

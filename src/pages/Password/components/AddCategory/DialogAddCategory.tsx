@@ -8,6 +8,7 @@ import { colors } from '../../../../constants/colors';
 import ManageCategoryContext from '../../../../context/ManageCategory';
 import TextFieldStyled from '../TextFieldStyled';
 import CarouselChips from './CarouselChips';
+import { AuthContext } from '../../../../context/auth';
 
 const { ChipsInput } = Incubator;
 
@@ -16,17 +17,24 @@ type Props = {
 }
 
 const DialogAddCategory = (props: Props) => {
+  const { userData } = useContext(AuthContext);
   const { 
     categoriesColors,
     chosedCategoryColor,
     setChosedCategoryColor,
-    setShowCreateCategoryDialog 
+    setShowCreateCategoryDialog ,
+    createNewCategory
   } = useContext(ManageCategoryContext);
   const [categoryLabel, setCategoryLabel] = useState<string>('')
 
     const onSubmit = () => {
-      console.log('submited')
+      const newCategory = {
+        userId: userData.id,
+        label: categoryLabel,
+        color: chosedCategoryColor
+      }
 
+      createNewCategory(newCategory);
     }
 
     return (

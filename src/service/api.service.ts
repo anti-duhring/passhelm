@@ -6,7 +6,10 @@ export class apiService {
 
     constructor(config: { token?: string }) {
         axios.defaults.baseURL = 'http://10.0.0.104:8080/api/v1';
-        axios.defaults.headers.common.Authorization = config.token ? `Bearer ${config.token}` : null
+
+        if(config.token) {
+            axios.defaults.headers.common.Authorization = `Bearer ${config.token}`
+        }
     }
 
     async login(credentials: TCredentials): Promise<TResponse> {
@@ -62,6 +65,26 @@ export class apiService {
                 error: null
             }
 
+        } catch(err) {
+            console.log(err)
+
+            return {
+                data: null,
+                error: err
+            }
+        }
+    }
+
+    async createCategory(category: TCategory) {
+        try {
+            const res = await axios.post(`/category`, category)
+            const newCategory: TCategory = res.data;
+
+            return {
+                data: newCategory,
+                error: null
+            }
+            
         } catch(err) {
             console.log(err)
 

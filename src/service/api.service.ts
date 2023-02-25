@@ -58,10 +58,10 @@ export class apiService {
     async getAllCategoriesFromUser(userID: string | number): Promise<TResponse> {
         try {
             const res = await axios.get(`/category?userId=${userID}`)
-            const allPasswords: TPassword[] = res.data;
+            const allCategories: TCategory[] = res.data;
 
             return {
-                data: allPasswords,
+                data: allCategories,
                 error: null
             }
 
@@ -87,6 +87,44 @@ export class apiService {
             
         } catch(err) {
             console.log(err)
+
+            return {
+                data: null,
+                error: err
+            }
+        }
+    }
+
+    async createPassword(password: TPassword) {
+        try {
+            const res = await axios.post(`/password`, password);
+            const newPassword: TPassword = res.data;
+
+            return {
+                data: newPassword,
+                error: null
+            }
+        } catch(err) {
+            console.log(err);
+
+            return {
+                data: null,
+                error: err
+            }
+        }
+    }
+
+    async updatePassword(password: TPassword) {
+        try {
+            const res = await axios.put(`/password/${password.id}`, password);
+            const newPassword: TPassword = res.data;
+
+            return {
+                data: newPassword,
+                error: null
+            }
+        } catch(err) {
+            console.log(err);
 
             return {
                 data: null,

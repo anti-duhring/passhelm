@@ -4,14 +4,19 @@ import { convertCategoryModelToChip } from "../../functions/AddCategory";
 import { Colors } from "react-native-ui-lib";
 import useCreateCategory from "../../hooks/useCreateCategory";
 import { colors } from "../../constants/colors";
+import useFetchCategories from "../../hooks/useFetchCategories";
 
 const ManageCategoryContext = createContext<any>(null);
 
 
 const ManageCategoryProvider = ({ children, password }) => {
-    const { allCategories } = useContext(AuthContext);
+    const { userData, setAllCategories } = useContext(AuthContext);
+    const fetchCategories = useFetchCategories();
+    const allCategories = [];
     const createCategory = useCreateCategory();
     const [categoriesChipFormat, setCategoriesChipFormat] = useState<TCategoryChip[]>([]);
+    const [isLoading, setIsLoading] = useState<boolean>(false);
+
     const [chosedCategoryId, setChoosedCategoryId] = useState<number>(password.category.id);
     const chosedCategory = allCategories.find(c => c.id == chosedCategoryId);
 
@@ -48,17 +53,19 @@ const ManageCategoryProvider = ({ children, password }) => {
     }
 
     const createNewCategory = async(category: TCategory) => {
+        setIsLoading(true);
+
         const newCategory = await createCategory.create(category);
         if(!newCategory) {
             return
         }
-        console.log(newCategory);
 
         const newCategoryAsChip = {
             ...newCategory,
             backgroundColor: newCategory.color,
             labelStyle: { color: 'white' },
             dismissColor: 'white',
+            containerStyle: { borderColor: newCategory.color },
             onPress: () => chooseCategory(newCategory.id)
         }
 
@@ -76,11 +83,22 @@ const ManageCategoryProvider = ({ children, password }) => {
 
             return [...oldCategoriesButRemoveThePreviouslyChosedOne, newCategoryAsChip]
         })
+        setAllCategories(oldCategories => {
+            const newCategories = [...oldCategories];
+            newCategories.push(newCategory)
+
+            return newCategories;
+        });
+
+        setIsLoading(false);
     }
-    
-    useEffect(() => {
+
+    const getCategoriesFromUserAndConvertToChip = async() => {
+        setIsLoading(true);
+        const { data, error } = await fetchCategories.fetch({ userID: userData.id});
+
         setCategoriesChipFormat(
-            convertCategoryModelToChip(allCategories).map(item => {
+            convertCategoryModelToChip(data).map(item => {
                 return {
                     ...item,
                     backgroundColor: chosedCategoryId == item.id? item.color : 'white',
@@ -90,6 +108,12 @@ const ManageCategoryProvider = ({ children, password }) => {
                 }
             })
         )
+
+        setIsLoading(false);
+    }
+    
+    useEffect(() => {
+        getCategoriesFromUserAndConvertToChip()
     },[])
 
     return (
@@ -103,7 +127,8 @@ const ManageCategoryProvider = ({ children, password }) => {
             categoriesColors,
             chosedCategoryColor,
             setChosedCategoryColor,
-            createNewCategory
+            createNewCategory,
+            isLoading
         }}>
             {children}
         </ManageCategoryContext.Provider>

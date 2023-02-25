@@ -23,7 +23,8 @@ const DialogAddCategory = (props: Props) => {
     chosedCategoryColor,
     setChosedCategoryColor,
     setShowCreateCategoryDialog ,
-    createNewCategory
+    createNewCategory,
+    isLoading
   } = useContext(ManageCategoryContext);
   const [categoryLabel, setCategoryLabel] = useState<string>('')
 
@@ -93,6 +94,7 @@ const DialogAddCategory = (props: Props) => {
             backgroundColor={colors.primary}
             style={styles.button}
             onPress={onSubmit}
+            disabled={isLoading}
           />
         </View>
       </View>

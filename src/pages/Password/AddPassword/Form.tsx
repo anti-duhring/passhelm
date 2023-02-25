@@ -5,24 +5,13 @@ import { Button } from 'react-native-ui-lib';
 import TextFieldStyled from '../components/TextFieldStyled';
 import Safe from '../../../components/Svg/Safe';
 import AddCategory from '../components/AddCategory';
-import { CreateCategoryContext } from '../../../context/createCategory';
-import { TCreateCategoryContext } from '../../../context/createCategory/createCategory';
-import { PasswordDataContext } from '../../../context/passwordData';
 import { MaterialIcons } from '@expo/vector-icons';
 
 type Props = {}
 
 const Form = (props: Props) => {
-    const {
-        validateLogin,
-        validatePassword,
-        loginError,
-        passwordError,
-    } = useContext(CreateCategoryContext) as TCreateCategoryContext;
-    const {
-        passwordData,
-        onChangeProperty
-    } = useContext(PasswordDataContext);
+
+
 
   return (
     <>
@@ -36,24 +25,24 @@ const Form = (props: Props) => {
         <View style={styles.fieldContainer}>
             <TextFieldStyled
                 placeholder='Título'
-                validate={['required', (value) => validateLogin(value)]}
+                // validate={['required', (value) => validateLogin(value)]}
                 validationMessage={['Preencha o login', 'Preencha um login válido']}
-                error={loginError}
-                onChange={(e) => onChangeProperty('title', e)}
+                error={false}
+                // onChange={(e) => onChangeProperty('title', e)}
             />
             <TextFieldStyled
                 placeholder='Login da conta'
-                validate={['required', (value) => validateLogin(value)]}
+                // validate={['required', (value) => validateLogin(value)]}
                 validationMessage={['Preencha o login', 'Preencha um login válido']}
-                error={loginError}
-                onChange={(e) => onChangeProperty('login', e)}
+                error={false}
+                // onChange={(e) => onChangeProperty('login', e)}
             />
             <TextFieldStyled
                 placeholder='Senha'
-                validate={['required', (value) => validatePassword(value)]}
+                // validate={['required', (value) => validatePassword(value)]}
                 validationMessage={['Preencha a senha', 'Preencha uma senha válida']}
-                error={passwordError}
-                onChange={(e) => onChangeProperty('password', e)}
+                error={false}
+                // onChange={(e) => onChangeProperty('password', e)}
             />
             <AddCategory />
         </View>
@@ -63,7 +52,7 @@ const Form = (props: Props) => {
             size={Button.sizes.large} 
             backgroundColor={colors.highlight}
             style={styles.button}
-            onPress={() => console.log(passwordData)}
+            onPress={() => console.log('pressed')}
             iconSource={() => <MaterialIcons name="file-download-done" size={24} color={colors.white} style={styles.updateIcon} />}
             iconOnRight
         />

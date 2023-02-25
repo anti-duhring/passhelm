@@ -4,7 +4,6 @@ import React from 'react';
 import { StyleSheet, View } from 'react-native';
 import { colors } from '../../../constants/colors';
 import { ManageCategoryProvider } from '../../../context/ManageCategory';
-import PasswordDataProvider from '../../../context/passwordData';
 import Form from './Form';
 import { ManagePasswordProvider } from '../../../context/ManagePassword';
 

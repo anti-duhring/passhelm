@@ -1,12 +1,18 @@
 import { createContext, useContext, useState } from "react";
 import { Password } from "../../models/password";
 import ManageCategoryContext from "../ManageCategory";
+import { apiService } from "../../service/api.service";
+import { AuthContext } from "../auth";
+import useFetchPasswords from "../../hooks/useFetchPasswords";
 
 const ManagePasswordContext = createContext<TManagePasswordContext>(null);
 
 const ManagePasswordProvider = ({ children, password }) => {
     const currentPassword = new Password(password);
     const { chosedCategoryId } = useContext(ManageCategoryContext);
+    const { setAllPasswords, allCategories, userData } =  useContext(AuthContext);
+    const { fetch } = useFetchPasswords();
+    const [isLoading, setIsLoading] = useState<boolean>(false);
     const [passwordData, setPasswordData] = useState<TPassword>({
         id: currentPassword.id,
         categoryId: currentPassword.categoryId,
@@ -30,11 +36,20 @@ const ManagePasswordProvider = ({ children, password }) => {
         })
     }
 
-    const submitPassword = () => {
+    const submitPassword = async() => {
+        setIsLoading(true);
+        const api = new apiService({});
+
         const editedPassword = {...passwordData}
         editedPassword.categoryId = chosedCategoryId;
         
-        console.log(editedPassword);
+        const updatePasswordResponse = await api.updatePassword(editedPassword);
+        const fetchNewPasswordsResponse: { data: TPassword[], error: string } = await fetch({ userID: userData.id });
+    
+        setPasswordData(updatePasswordResponse.data);
+        setAllPasswords(fetchNewPasswordsResponse.data);
+
+        setIsLoading(false);
     }
 
     return (

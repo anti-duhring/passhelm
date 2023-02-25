@@ -1,5 +1,5 @@
 import { StyleSheet, Text, View } from 'react-native'
-import { useContext } from 'react'
+import { useContext, useEffect } from 'react'
 import { FlashList } from '@shopify/flash-list'
 import { SwipeProvider } from 'react-native-swipe-item';
 import PasswordItem from './PasswordItem';
@@ -23,13 +23,13 @@ const PasswordList = (props: Props) => {
       <FlashList
         data={allPasswords}
         renderItem={({ item }) => {
-          const category = allCategories.find(c => c.id == item.categoryId);
-          const itemWithCategory = {
-            ...item,
-            category: category
-          }
+          // const category = allCategories.find(c => c.id == item.categoryId);
+          // const itemWithCategory = {
+          //   ...item,
+          //   category: category
+          // }
 
-          return <PasswordItem item={itemWithCategory} />
+          return <PasswordItem item={item} />
         }}
         estimatedItemSize={200}
         contentContainerStyle={styles.container}

@@ -23,18 +23,17 @@ class PasswordItem extends React.Component<Props> {
             showPassword: !this.state.showPassword
         })
     }
-    buttons = (
-        <SwipeButtonsContainer style={styles.swipeButtonContainer}>
-            <SwipeButtons item={this.props.item} />
-        </SwipeButtonsContainer>
-    )
     render() {
 
         if(!this.props.item.hasOwnProperty('category')) return
-        
+
         return (
             <SwipeItem 
-                rightButtons={this.buttons}
+                rightButtons={
+                    <SwipeButtonsContainer style={styles.swipeButtonContainer}>
+                        <SwipeButtons item={this.props.item} />
+                    </SwipeButtonsContainer>
+                }
                 style={styles.swipeItem}
                 disableSwipeIfNoButton
                 // disableButtonScale={{

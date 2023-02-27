@@ -8,8 +8,7 @@ import useFetchPasswords from "../../hooks/useFetchPasswords";
 
 const ManagePasswordContext = createContext<TManagePasswordContext>(null);
 
-// TODO: sort passwords by category
-// TODO: chosed category is not correct
+// TODO: IsLoading when update and create password to avoid double clicks
 const ManagePasswordProvider = ({ children, password }) => {
     const currentPassword = new Password(password);
     const { chosedCategoryId } = useContext(ManageCategoryContext);
@@ -51,6 +50,8 @@ const ManagePasswordProvider = ({ children, password }) => {
     
         setPasswordData(updatePasswordResponse.data);
         setAllPasswords(fetchNewPasswordsResponse.data);
+
+        console.log(fetchNewPasswordsResponse.data);
 
         ToastAndroid.showWithGravity(
             'Conta atualizada com sucesso',

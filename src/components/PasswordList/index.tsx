@@ -23,12 +23,6 @@ const PasswordList = (props: Props) => {
       <FlashList
         data={allPasswords}
         renderItem={({ item }) => {
-          // const category = allCategories.find(c => c.id == item.categoryId);
-          // const itemWithCategory = {
-          //   ...item,
-          //   category: category
-          // }
-
           return <PasswordItem item={item} />
         }}
         estimatedItemSize={200}

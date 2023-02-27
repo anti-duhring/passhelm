@@ -21,6 +21,7 @@ const SwipeButtons = (props: Props) => {
                 onPress={() => navigation.navigate('EditPassword' as never, {
                     item: props.item
                 } as never)}
+                // onPress={() => console.log(props.item)}
                 style={[styles.button]}
             >
                 <Feather name="edit" size={24} color={colors.primary} />

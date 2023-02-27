@@ -1,6 +1,7 @@
 import { createContext, useEffect, useState } from "react";
 import usePersistUserData from "../../hooks/usePersistUserData";
 import { apiService } from "../../service/api.service";
+import { sortPasswordListById } from "../../functions/utils";
 
 export const AuthContext = createContext<TAuthContext>(null);
 
@@ -48,7 +49,7 @@ const AuthContextProvider = ({ children }) => {
         if(everyPasswordHasACategoryNested) return 
         
         setAllPasswords(oldItens => 
-            oldItens.map(p => {
+            sortPasswordListById(oldItens).map(p => {
                 return {
                     ...p, 
                     category: allCategories.find(c => c.id == p.categoryId)
@@ -77,7 +78,7 @@ const AuthContextProvider = ({ children }) => {
 
                 setUserData(resUserData);
                 setAllPasswords(
-                    resAllPasswords.map(p => {
+                    sortPasswordListById(resAllPasswords).map(p => {
                         return {
                             ...p, 
                             category: resAllCategories.find(c => c.id == p.categoryId)

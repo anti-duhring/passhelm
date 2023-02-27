@@ -6,12 +6,16 @@ import { colors } from '../../constants/colors';
 
 type Props = {
     text: string,
-    icon?: React.ReactNode
+    icon?: React.ReactNode,
+    onPress?: (arg: unknown) => unknown
 }
 
 const Item = (props: Props) => {
   return (
-    <TouchableOpacity style={styles.container}>
+    <TouchableOpacity 
+        style={styles.container}
+        onPress={props.onPress}
+    >
         <View style={styles.legend}>
             {props.icon}
             <TextStyled 

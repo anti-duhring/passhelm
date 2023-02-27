@@ -1,10 +1,12 @@
 import { createContext, useEffect, useState } from "react";
 import usePersistUserData from "../../hooks/usePersistUserData";
+import { apiService } from "../../service/api.service";
 
 export const AuthContext = createContext<TAuthContext>(null);
 
 const AuthContextProvider = ({ children }) => {
     const [userData, setUserData] = useState<TUserData | null>(null);
+    const [token, setToken] = useState<string | null>(null);
     const [allPasswords, setAllPasswords] = useState<TPassword[]>([]);
     const [allCategories, setAllCategories] = useState<TCategory[]>([]);
 
@@ -16,7 +18,7 @@ const AuthContextProvider = ({ children }) => {
     } = usePersistUserData();
 
     useEffect(() => {
-
+        // Save data when data has changed
         setAll([
             userData ? {
                 name: 'userData',
@@ -29,10 +31,14 @@ const AuthContextProvider = ({ children }) => {
             allCategories.length ? {
                 name: 'allCategories',
                 object: allCategories
-            } : null
-        ]).then(res => console.log('set', res));
+            } : null,
+            token? {
+                name: 'token',
+                object: token
+            }: null
+        ]);
 
-    },[userData, allPasswords, allCategories])
+    },[userData, allPasswords, allCategories, token])
 
     useEffect(() => {
         if(!allPasswords.length || !allCategories.length) return
@@ -53,19 +59,33 @@ const AuthContextProvider = ({ children }) => {
     },[allCategories, allPasswords])
 
     useEffect(() => {
-    
-        // TODO: verify why category object returns as [Object]
+        // Set default token authorization when update token
+        if(!token) return
+        
+        const api = new apiService({});
+        api.setAuthorization(token);
+
+    },[token])
+
+    useEffect(() => {
+        // Get user authentication when reload the app
         if(userData) return
 
-        getAll(['userData', 'allPasswords', 'allCategories'])
+        getAll(['userData', 'token', 'allPasswords', 'allCategories'])
             .then(res => {
-                const [resUserData, resAllPasswords, resAllCategories] = res as [TUserData, TPassword[], TCategory[]];
+                const [resUserData, resToken, resAllPasswords, resAllCategories] = res as [TUserData, string, TPassword[], TCategory[]];
 
                 setUserData(resUserData);
-                setAllPasswords(resAllPasswords);
+                setAllPasswords(
+                    resAllPasswords.map(p => {
+                        return {
+                            ...p, 
+                            category: resAllCategories.find(c => c.id == p.categoryId)
+                        }
+                    })
+                );
                 setAllCategories(resAllCategories);
-
-                console.log('get', res)
+                setToken(resToken);
             })
 
     },[])
@@ -74,9 +94,11 @@ const AuthContextProvider = ({ children }) => {
         <AuthContext.Provider 
             value={{
                 userData,
+                token,
                 allPasswords,
                 allCategories,
                 setUserData,
+                setToken,
                 setAllPasswords,
                 setAllCategories
             }}

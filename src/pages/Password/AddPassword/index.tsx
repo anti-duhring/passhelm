@@ -3,11 +3,16 @@ import React from 'react'
 import { colors } from '../../../constants/colors'
 import { StatusBar } from 'expo-status-bar'
 import Form from './Form'
+import { ManageCategoryProvider } from '../../../context/ManageCategory'
+import { ManagePasswordProvider } from '../../../context/ManagePassword'
 
 type Props = {}
 
 const AddPassword = (props: Props) => {
+
   return (
+    <ManageCategoryProvider password={{}}>
+      <ManagePasswordProvider password={{}}>
         <View style={styles.container}>
           <StatusBar 
             style='light' 
@@ -18,6 +23,8 @@ const AddPassword = (props: Props) => {
             <Form />
           </View>
         </View>
+      </ManagePasswordProvider>
+    </ManageCategoryProvider>
   )
 }
 

@@ -1,16 +1,19 @@
-import { StyleSheet, View, TouchableOpacity } from 'react-native'
-import React from 'react'
-import { colors } from '../../constants/colors'
 import { Ionicons } from '@expo/vector-icons';
-import { Entypo } from '@expo/vector-icons';
+import React from 'react';
+import { StyleSheet, TouchableOpacity, View } from 'react-native';
+
+import { colors } from '../../constants/colors';
+import usePassword from '../../hooks/usePassword';
 
 type Props = {
-    item: any,
+    item: TPassword,
     toggleShowPassword: () => void,
     showPassword: boolean
 }
 
 const ActionButtons = (props: Props) => {
+    const { copy } = usePassword();
+
   return (
     <View style={styles.action}>
         <TouchableOpacity 
@@ -23,7 +26,10 @@ const ActionButtons = (props: Props) => {
                 color={colors.black} 
             />
         </TouchableOpacity>
-        <TouchableOpacity style={[styles.actionButton, { marginLeft: 10 }]}>
+        <TouchableOpacity 
+            style={[styles.actionButton, { marginLeft: 10 }]}
+            onPress={() => copy(props.item)}
+        >
             <Ionicons 
                 name="copy-outline" 
                 size={24} 

@@ -10,7 +10,7 @@ import SwipeButtons from './SwipeButtons';
 type Props = {
     item: any
 }
-// TODO: undefined is not an object this.props.item.category.color
+
 class PasswordItem extends React.Component<Props> {
     constructor(props: Props) {
         super(props)

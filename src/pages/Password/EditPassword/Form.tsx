@@ -17,7 +17,7 @@ const Form = (props: Props) => {
         password, 
         editPasswordProperty,
         labelErrors,
-        submitPassword
+        editPassword
     } = useContext(ManagePasswordContext);
 
   return (
@@ -62,7 +62,7 @@ const Form = (props: Props) => {
             size={Button.sizes.large} 
             backgroundColor={colors.highlight}
             style={styles.button}
-            onPress={submitPassword}
+            onPress={editPassword}
             iconSource={() => <MaterialIcons name="file-download-done" size={24} color={colors.white} style={styles.updateIcon} />}
             iconOnRight
         />

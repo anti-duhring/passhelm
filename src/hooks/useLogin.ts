@@ -8,7 +8,8 @@ const useLogin = () => {
     const { 
         setUserData, 
         setAllPasswords,
-        setAllCategories
+        setAllCategories,
+        setToken
     } = useContext(AuthContext);
     const [error, setError] = useState<String | null>(null);
     const [isLoading, setIsLoading] = useState<boolean>(false);
@@ -27,6 +28,7 @@ const useLogin = () => {
             return
         }
 
+        setToken(response.data.token);
         setUserData(response.data.user);
 
         await getPasswords(response.data.user.id);

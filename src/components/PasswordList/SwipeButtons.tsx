@@ -1,17 +1,19 @@
-import { StyleSheet, TouchableOpacity, View } from 'react-native'
-import React from 'react'
-import { colors } from '../../constants/colors';
-import TextStyled from '../TextStyled';
-import { Ionicons } from '@expo/vector-icons';
-import { Feather } from '@expo/vector-icons';
+import { Feather, Ionicons } from '@expo/vector-icons';
 import { useNavigation } from '@react-navigation/native';
+import React from 'react';
+import { StyleSheet, TouchableOpacity } from 'react-native';
+
+import { colors } from '../../constants/colors';
+import usePassword from '../../hooks/usePassword';
+import TextStyled from '../TextStyled';
 
 type Props = {
     item: any;
 }
 
 const SwipeButtons = (props: Props) => {
-    const navigation = useNavigation()
+    const navigation = useNavigation();
+    const { remove } = usePassword();
 
   return (
         <>
@@ -32,7 +34,7 @@ const SwipeButtons = (props: Props) => {
                 </TextStyled>
             </TouchableOpacity>
             <TouchableOpacity
-                onPress={() => console.log('left button clicked')}
+                onPress={() => remove(props.item.id)}
                 style={[styles.button, styles.lastButton]}
             >
                 <Ionicons name="trash-outline" size={24} color={colors.red} />

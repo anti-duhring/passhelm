@@ -10,14 +10,13 @@ const ManageCategoryContext = createContext<any>(null);
 
 
 const ManageCategoryProvider = ({ children, password }) => {
-    const { userData, setAllCategories } = useContext(AuthContext);
+    const { userData, setAllCategories, allCategories } = useContext(AuthContext);
     const fetchCategories = useFetchCategories();
-    const allCategories = [];
     const createCategory = useCreateCategory();
     const [categoriesChipFormat, setCategoriesChipFormat] = useState<TCategoryChip[]>([]);
     const [isLoading, setIsLoading] = useState<boolean>(false);
 
-    const [chosedCategoryId, setChoosedCategoryId] = useState<number>(password.category.id);
+    const [chosedCategoryId, setChoosedCategoryId] = useState<number>(password.category?.id ?? allCategories[0].id);
     const chosedCategory = allCategories.find(c => c.id == chosedCategoryId);
 
     const [showCreateCategoryDialog, setShowCreateCategoryDialog] = useState<boolean>(false);

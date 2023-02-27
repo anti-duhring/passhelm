@@ -3,10 +3,12 @@ import React from 'react'
 import Item from './Item'
 import { Ionicons } from '@expo/vector-icons';
 import { colors } from '../../constants/colors';
+import useLogout from '../../hooks/useLogout';
 
 type Props = {}
 
 const List = (props: Props) => {
+    const { logout } = useLogout();
   return (
     <View style={styles.container}>
         <Item 
@@ -20,6 +22,7 @@ const List = (props: Props) => {
         <Item 
             text='Sair do aplicativo'
             icon={<Ionicons name="exit-outline" size={24} color={colors.black} />}
+            onPress={logout}
         />
     </View>
   )

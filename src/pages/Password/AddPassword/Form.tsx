@@ -6,12 +6,17 @@ import TextFieldStyled from '../components/TextFieldStyled';
 import Safe from '../../../components/Svg/Safe';
 import AddCategory from '../components/AddCategory';
 import { MaterialIcons } from '@expo/vector-icons';
+import ManagePasswordContext from '../../../context/ManagePassword';
 
 type Props = {}
 
 const Form = (props: Props) => {
-
-
+    const { 
+        password, 
+        editPasswordProperty,
+        labelErrors,
+        createPassword
+    } = useContext(ManagePasswordContext);
 
   return (
     <>
@@ -25,24 +30,24 @@ const Form = (props: Props) => {
         <View style={styles.fieldContainer}>
             <TextFieldStyled
                 placeholder='Título'
-                // validate={['required', (value) => validateLogin(value)]}
+                validate={['required']}
                 validationMessage={['Preencha o login', 'Preencha um login válido']}
-                error={false}
-                // onChange={(e) => onChangeProperty('title', e)}
+                error={labelErrors.title}
+                onChange={(e) => editPasswordProperty('title', e)}
             />
             <TextFieldStyled
                 placeholder='Login da conta'
-                // validate={['required', (value) => validateLogin(value)]}
+                validate={['required']}
                 validationMessage={['Preencha o login', 'Preencha um login válido']}
-                error={false}
-                // onChange={(e) => onChangeProperty('login', e)}
+                error={labelErrors.login}
+                onChange={(e) => editPasswordProperty('login', e)}
             />
             <TextFieldStyled
                 placeholder='Senha'
-                // validate={['required', (value) => validatePassword(value)]}
-                validationMessage={['Preencha a senha', 'Preencha uma senha válida']}
-                error={false}
-                // onChange={(e) => onChangeProperty('password', e)}
+                validate={['required']}
+                validationMessage={['Preencha a senha', 'Preencha um login válido']}
+                error={labelErrors.password}
+                onChange={(e) => editPasswordProperty('password', e)}
             />
             <AddCategory />
         </View>
@@ -52,7 +57,7 @@ const Form = (props: Props) => {
             size={Button.sizes.large} 
             backgroundColor={colors.highlight}
             style={styles.button}
-            onPress={() => console.log('pressed')}
+            onPress={createPassword}
             iconSource={() => <MaterialIcons name="file-download-done" size={24} color={colors.white} style={styles.updateIcon} />}
             iconOnRight
         />

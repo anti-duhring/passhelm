@@ -11,14 +11,16 @@ const usePersistUserData = () => {
         
     }
 
-    const setAll = (dataArray: { name: string, object: any }[]) => {
+    const setAll = (dataArray: { name: string, object: unknown }[]) => {
         const dataArrayFiltered = dataArray.filter(v => v);
         const promisesArray = dataArrayFiltered.map(data => 
-            new Promise(async(resolve, reject) => 
+            {  
+
+                return new Promise(async(resolve, reject) => 
                 await AsyncStorage.setItem(data.name, JSON.stringify(data.object))
                     .then(() => resolve({ success: true }))
                     .catch(err => reject(err))
-            )
+            )}
         )
 
         return Promise.all(promisesArray)
@@ -37,7 +39,10 @@ const usePersistUserData = () => {
         const promises = dataArrayFiltered.map(name => 
             new Promise(async(resolve, reject) =>
                 await AsyncStorage.getItem(name)
-                    .then(res => resolve(JSON.parse(res)))
+                    .then(res => {
+
+                        resolve(JSON.parse(res))
+                    })
                     .catch(err => reject(err))
             )    
         )
@@ -45,7 +50,20 @@ const usePersistUserData = () => {
         return Promise.all(promises)
     }
 
-    return { set, get, setAll, getAll }
+    const removeAll = (dataArray: string[]) => {
+        const dataArrayFiltered = dataArray.filter(v => v);
+        const promises = dataArrayFiltered.map(name => 
+            new Promise(async(resolve, reject) =>
+                await AsyncStorage.removeItem(name)
+                    .then(res => resolve({ success: true }))
+                    .catch(err => reject(err))
+            )    
+        )
+
+        return Promise.all(promises)
+    }
+
+    return { set, get, setAll, getAll, removeAll }
 }
 
 export default usePersistUserData;

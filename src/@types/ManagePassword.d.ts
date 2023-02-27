@@ -2,7 +2,8 @@ type TManagePasswordContext = {
     password: TPassword,
     editPasswordProperty: (string, string) => void,
     labelErrors: TLabelErrors,
-    submitPassword: () => void
+    editPassword: () => void,
+    createPassword: () => void
 }
 
 type TLabelErrors = {

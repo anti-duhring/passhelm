@@ -12,6 +12,10 @@ export class apiService {
         }
     }
 
+    setAuthorization(token: string) {
+        axios.defaults.headers.common.Authorization = `Bearer ${token}`
+    }
+
     async login(credentials: TCredentials): Promise<TResponse> {
         try {
             const res = await axios.post('/login', credentials)
@@ -121,6 +125,26 @@ export class apiService {
 
             return {
                 data: newPassword,
+                error: null
+            }
+        } catch(err) {
+            console.log(err);
+
+            return {
+                data: null,
+                error: err
+            }
+        }
+    }
+
+    async deletePassword(passwordID: string | number) {
+        try {
+            const res = await axios.delete(`/password/${passwordID}`);
+
+            return {
+                data: {
+                    success: true
+                },
                 error: null
             }
         } catch(err) {

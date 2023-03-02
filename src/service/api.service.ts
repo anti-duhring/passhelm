@@ -1,9 +1,8 @@
 import axios from "axios";
 import { User } from "../models/user";
 
-
 export class apiService {
-
+    // TODO: You attempted attempted to import the Node standard library module "https" from "src\service\api.service.ts". 
     constructor(config: { token?: string }) {
         axios.defaults.baseURL = 'http://10.0.0.104:8080/api/v1';
 

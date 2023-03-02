@@ -1,16 +1,25 @@
-import { StyleSheet, TouchableOpacity, TextInput, View } from 'react-native'
-import React from 'react'
+import { 
+  StyleSheet, 
+  TouchableOpacity, 
+  TextInput, 
+  View 
+} from 'react-native'
+import React, { useContext } from 'react'
 import { colors } from '../../constants/colors';
 import { Ionicons } from '@expo/vector-icons';
+import SearchContext from '../../context/Search';
 
 type Props = {}
 
 const Searchbar = (props: Props) => {
+  const { setSearchText } = useContext(SearchContext);
+
   return (
     <View style={styles.container}>
       <TextInput
         style={styles.input}
         placeholder={'Pesquisar...'}
+        onChangeText={(e) => setSearchText(e)}
       />
       <TouchableOpacity 
         style={styles.icon}

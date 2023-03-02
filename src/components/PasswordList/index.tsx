@@ -6,6 +6,7 @@ import PasswordItem from './PasswordItem';
 import { passwordList } from '../../constants/password';
 import { AuthContext } from '../../context/auth';
 import TextStyled from '../TextStyled';
+import SearchContext from '../../context/Search';
 
 type Props = {}
 
@@ -13,11 +14,7 @@ type Props = {}
 
 
 const PasswordList = (props: Props) => {
-  const { allPasswords, allCategories } = useContext(AuthContext);
-
-  if(!allPasswords.length || !allCategories.length) {
-    return (<TextStyled>Loading...</TextStyled>)
-  }
+  const { allPasswords, allCategories } = useContext(SearchContext);
 
   return (
       <FlashList

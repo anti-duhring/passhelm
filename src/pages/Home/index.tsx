@@ -7,6 +7,7 @@ import FloatingButton from '../../components/FloatingButton';
 import { ScrollView } from '@gemcook/react-native-animated-scroll-view';
 import { colors } from '../../constants/colors';
 import Searchbar from '../../components/Searchbar';
+import { SearchProvider } from '../../context/Search';
 
 const maxHeaderHeight = 180;
 const minHeaderHeight = 70;
@@ -15,24 +16,26 @@ const Home = ({ navigation }) => {
   const [isLoading, setIsLoading] = useState<boolean>(true);
 
   return (
-    <View style={{flex: 1}}>
-    <ScrollView 
-      style={styles.container}
-      maxHeaderHeight={maxHeaderHeight}
-      minHeaderHeight={minHeaderHeight}
-      AnimationHeaderComponent={<Header />}
-    >
-      
-      <View style={styles.body}>
-        <Searchbar />
-        <PasswordList />
+    <SearchProvider>
+      <View style={{flex: 1}}>
+      <ScrollView 
+        style={styles.container}
+        maxHeaderHeight={maxHeaderHeight}
+        minHeaderHeight={minHeaderHeight}
+        AnimationHeaderComponent={<Header />}
+      >
+        
+        <View style={styles.body}>
+          <Searchbar />
+          <PasswordList />
+        </View>
+      </ScrollView>
+        <FloatingButton
+          icon={<Ionicons name="add" size={30} color="white" />}
+          onPress={() => navigation.navigate('AddPassword')}
+        />
       </View>
-    </ScrollView>
-      <FloatingButton
-        icon={<Ionicons name="add" size={30} color="white" />}
-        onPress={() => navigation.navigate('AddPassword')}
-      />
-    </View>
+    </SearchProvider>
   );
 }
 
